@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chapter 2: Coding Practice Exercises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --fg: #1d2433;
+            --mu: #5b6475;
+            --ac: #1f5f8b;
+            --card: #fff;
+            --bd: #dfe3ea;
+            --code: #eef2f7;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #13171f;
+                --fg: #e8ebf1;
+                --mu: #98a2b3;
+                --ac: #6cb4e4;
+                --card: #1b212c;
+                --bd: #2c3442;
+                --code: #232b38;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #13171f;
+            --fg: #e8ebf1;
+            --mu: #98a2b3;
+            --ac: #6cb4e4;
+            --card: #1b212c;
+            --bd: #2c3442;
+            --code: #232b38;
+            color-scheme: dark
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 17px/1.65 Georgia, 'Times New Roman', serif
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 36px 20px 60px
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 38px);
+            line-height: 1.2;
+            text-align: center;
+            margin: .2em 0
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--mu);
+            margin-bottom: 28px
+        }
+
+        h2 {
+            margin-top: 2em;
+            padding-top: .4em;
+            border-top: 2px solid var(--ac);
+            font-size: 23px
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: .2em
+        }
+
+        .card,
+        .q {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 12px 0
+        }
+
+        .tag {
+            font: 600 12px system-ui;
+            border-radius: 10px;
+            padding: 2px 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+            background: var(--code);
+            color: var(--ac)
+        }
+
+        .easy {
+            color: #2e9b57
+        }
+
+        .medium {
+            color: #c98a00
+        }
+
+        .hard {
+            color: #c0392b
+        }
+
+        pre {
+            background: var(--code);
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        code {
+            background: var(--code);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font: .9em ui-monospace, Menlo, monospace
+        }
+
+        .mu {
+            color: var(--mu);
+            font-size: 15px
+        }
+
+        button {
+            font: 14px system-ui;
+            background: var(--ac);
+            color: var(--bg);
+            border: 0;
+            border-radius: 16px;
+            padding: 6px 16px;
+            cursor: pointer;
+            margin: 4px 6px 4px 0
+        }
+
+        button.on {
+            outline: 2px solid var(--fg)
+        }
+
+        .o {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font: 15px system-ui;
+            background: var(--code);
+            color: var(--fg);
+            border: 1px solid var(--bd)
+        }
+
+        .ok {
+            border-color: #2e9b57 !important;
+            background: rgba(46, 155, 87, .2) !important
+        }
+
+        .no {
+            border-color: #c0392b !important;
+            background: rgba(192, 57, 43, .2) !important
+        }
+
+        .why {
+            font: 14px system-ui;
+            color: var(--mu);
+            margin-top: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 style="font-size:xx-large; margin-bottom: -4%">
+            Fundamentals of Programming I
+        </h1>
+        <h2 style="text-align:center; margin-bottom: -6%;">
+            Chapter 2 - Basic Programming Constructors
+            <br> Practice Exercises 
+        </h2>
+
+        <h2 id="prec" style="margin-top: 6%;">
+            Part 1: Coding Writing
+        </h2>
+
+        <div class="card"><b>How to use this page</b>
+            <ul>
+                <li>Type each program in your IDE, compile it and run it. Do not just read it.</li>
+                <li>Test it with the given data, then with your own.</li>
+                <li>Only open the solutions page after you have tried.</li>
+                <li>These use only what Chapter 2 teaches: input/output, variables, operators, the conditional operator,
+                    casting and the math library. Decisions with <code>if</code> and loops come in Chapter 3.</li>
+            </ul>
+        </div>
+        
+        <h2><span class="easy">Easy</span> level</h2>
+        <div class="card">
+            <h3>Exercise 1: Escape sequences</h3>
+            <p>Print exactly two lines. Line 1: the word Name:, a tab, then Abebe. Line 2: She said "Hello" (the quote
+                marks must appear in the output).</p>
+            <p class="mu"><b>Test data:</b> Expected output: Name:[tab]Abebe and She said "Hello"</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 2: Sum, difference and product</h3>
+            <p>Read two integers. Print their sum, difference and product.</p>
+            <p class="mu"><b>Test data:</b> 7 and 3 give 10, 4 and 21.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 3: Rectangle area and perimeter</h3>
+            <p>Read the length and width of a rectangle (decimals allowed). Print the area and the perimeter.</p>
+            <p class="mu"><b>Test data:</b> 5.5 and 2 give area 11 and perimeter 15.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 4: Simple interest</h3>
+            <p>Read the principal P, the rate R (percent per year) and the time T (years). Print the simple interest I =
+                P × R × T / 100.</p>
+            <p class="mu"><b>Test data:</b> P = 2000, R = 5, T = 3 gives 300.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 5: Average of three numbers</h3>
+            <p>Read three integers and print their average as a real number.</p>
+            <p class="mu"><b>Test data:</b> 5, 6 and 8 give 6.33333 (not 6).</p>
+        </div>
+        <h2><span class="medium">Medium</span> level</h2>
+        <div class="card">
+            <h3>Exercise 6: Seconds to hours, minutes, seconds</h3>
+            <p>Read a number of seconds. Print it as hours, minutes and seconds.</p>
+            <p class="mu"><b>Test data:</b> 3725 gives 1 h 2 m 5 s.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 7: Largest of three (conditional operator)</h3>
+            <p>Read three numbers and print the largest. Use only the conditional operator ?: (no if).</p>
+            <p class="mu"><b>Test data:</b> (4, 9, 6) gives 9. (7, 7, 3) gives 7.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 8: Swap two numbers</h3>
+            <p>Read two numbers. Print them, swap their values using a third variable, then print them again.</p>
+            <p class="mu"><b>Test data:</b> 10 and 25: before 10 25, after 25 10.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 9: BMI with formatted output</h3>
+            <p>Read weight (kg) and height (m). Compute BMI = weight / (height × height). Print a small table with the
+                three values, two decimal places each, in columns of width 12.</p>
+            <p class="mu"><b>Test data:</b> 70 and 1.75 give BMI 22.86.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 10: Sum of the digits of a 3-digit number</h3>
+            <p>Read a 3-digit integer and print the sum of its digits.</p>
+            <p class="mu"><b>Test data:</b> 482 gives 14.</p>
+        </div>
+        <h2><span class="hard">Hard</span> level</h2>
+        <div class="card">
+            <h3>Exercise 11: Leap year</h3>
+            <p>Read a year. Print "Leap year" or "Not leap year". A year is a leap year if it is divisible by 4 but not
+                by 100, or it is divisible by 400. Use a logical expression and the conditional operator.</p>
+            <p class="mu"><b>Test data:</b> 2024: leap. 1900: not leap. 2000: leap. 2023: not leap.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 12: Reverse a 3-digit number</h3>
+            <p>Read a 3-digit integer and print it reversed.</p>
+            <p class="mu"><b>Test data:</b> 123 gives 321. 405 gives 504. 120 gives 21 (explain why).</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 13: Distance between two points</h3>
+            <p>Read the coordinates (x1, y1) and (x2, y2). Print the distance √((x2−x1)² + (y2−y1)²) with 2 decimals.
+                Use the math library.</p>
+            <p class="mu"><b>Test data:</b> (1, 2) and (4, 6) give 5.00.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 14: Wrapping around</h3>
+            <p>Declare an <code>unsigned short</code> equal to 65535. Print it, add 1 and print again, then subtract 1
+                and print again. Explain the results.</p>
+            <p class="mu"><b>Test data:</b> Expected: 65535, then 0, then 65535.</p>
+        </div>
+        <div class="card">
+            <h3>Exercise 15: Bitwise operators</h3>
+            <p>Read two integers a and b. Print a &amp; b, a | b, a ^ b, ~a, a &lt;&lt; 2 and a &gt;&gt; 1. Then use the
+                conditional operator and the expression (a &amp; 1) to print whether a is even or odd.</p>
+            <p class="mu"><b>Test data:</b> a = 8, b = 3 give 0, 11, 11, -9, 32, 4, and even.</p>
+        </div>
+        <h2 id="prec">Part 2: Operator Precedence, Worked by hand</h2>
+        <p>No program needed. Use pen and paper, show your steps, and use the table below. Then check yourself on the
+            solutions page.</p>
+        <div class="card"><b>Precedence table (highest first)</b>
+            <div style="overflow-x:auto">
+                <table style="border-collapse:collapse;width:100%;font-size:15px">
+                    <tr>
+                        <th align="left">Level</th>
+                        <th align="left">Operators</th>
+                        <th align="left">Order</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><code>++ --</code> (postfix)</td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><code>!  ++ --</code> (prefix), <code>sizeof</code></td>
+                        <td>right to left</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><code>* / %</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><code>+ -</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><code>&lt; &lt;= &gt; &gt;=</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><code>== !=</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><code>&amp;&amp;</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><code>||</code></td>
+                        <td>left to right</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><code>? :</code></td>
+                        <td>right to left</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><code>= += -= *= /= %=</code></td>
+                        <td>right to left</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><code>,</code></td>
+                        <td>left to right</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card"><b>Rules to remember</b>
+            <ul>
+                <li>Brackets <code>( )</code> are done first.</li>
+                <li>Operators on the same level follow the direction in the last column.</li>
+                <li>Relational and logical results are <b>1</b> (true) or <b>0</b> (false). In arithmetic they behave as
+                    1 and 0.</li>
+                <li>Assignment operators (including <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>,
+                    <code>%=</code>) are the lowest. The whole right side is worked out first.</li>
+                <li><code>&amp;&amp;</code> and <code>||</code> stop early: if the left side already decides the answer,
+                    the right side is not evaluated, so its <code>++</code> or <code>--</code> never happens.</li>
+                <li>Dividing two integers drops the fraction.</li>
+            </ul>
+        </div>
+        <h3>A. Add brackets (no calculation)</h3>
+        <div class="card"><b>Question 1</b><span class="tag easy">Easy</span>
+            <pre>n &lt;= p &amp;&amp; n &gt;= p || n == 0</pre>
+            <p>Fully bracket the expression to show the order of evaluation.</p>
+        </div>
+        <div class="card"><b>Question 2</b><span class="tag easy">Easy</span>
+            <pre>a + b * c - d / e % f</pre>
+            <p>Fully bracket the expression.</p>
+        </div>
+        <div class="card"><b>Question 3</b><span class="tag medium">Medium</span>
+            <pre>x += y = z * 2</pre>
+            <p>Fully bracket the expression.</p>
+        </div>
+        <div class="card"><b>Question 4</b><span class="tag medium">Medium</span>
+            <pre>!a == b &amp;&amp; c</pre>
+            <p>Fully bracket the expression.</p>
+        </div>
+        <div class="card"><b>Question 5</b><span class="tag hard">Hard</span>
+            <pre>a = b &gt; c ? d : e + 1</pre>
+            <p>Fully bracket the expression.</p>
+        </div>
+        <h3>B. Work out the result by hand</h3>
+        <div class="card"><b>Question 6</b><span class="tag easy">Easy</span>
+            <pre>int r = 2 + 3 * 4;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 7</b><span class="tag easy">Easy</span>
+            <pre>int r = 20 - 6 / 2 + 1;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 8</b><span class="tag easy">Easy</span>
+            <pre>int r = 17 % 5 * 2;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 9</b><span class="tag easy">Easy</span>
+            <pre>int r = 10 / 4 * 2;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 10</b><span class="tag easy">Easy</span>
+            <pre>int r = 3 + 4 &gt; 6;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 11</b><span class="tag medium">Medium</span>
+            <pre>int a = 5, b = 3;
+a += b * 2;</pre>
+            <p>Find a and b.</p>
+        </div>
+        <div class="card"><b>Question 12</b><span class="tag medium">Medium</span>
+            <pre>int x = 10, y = 4;
+x -= y + 2;</pre>
+            <p>Find x and y.</p>
+        </div>
+        <div class="card"><b>Question 13</b><span class="tag medium">Medium</span>
+            <pre>int a = 12, b = 5;
+a %= b + 1;</pre>
+            <p>Find a.</p>
+        </div>
+        <div class="card"><b>Question 14</b><span class="tag medium">Medium</span>
+            <pre>int a = 3, b = 7, c = 5;
+int r = a &gt; b || c == 5 &amp;&amp; b &gt; a;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 15</b><span class="tag medium">Medium</span>
+            <pre>int x = 5;
+int r = !x &gt; 3;</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 16</b><span class="tag medium">Medium</span>
+            <pre>int a = 5;
+a += a &gt; 3;</pre>
+            <p>Find a.</p>
+        </div>
+        <div class="card"><b>Question 17</b><span class="tag hard">Hard</span>
+            <pre>int x = 4, y = 9;
+x += y &gt; 5 &amp;&amp; x &lt; 10;</pre>
+            <p>Find x.</p>
+        </div>
+        <div class="card"><b>Question 18</b><span class="tag hard">Hard</span>
+            <pre>int a = 6, b = 4;
+a -= b *= 2;</pre>
+            <p>Find a and b.</p>
+        </div>
+        <div class="card"><b>Question 19</b><span class="tag hard">Hard</span>
+            <pre>int a = 5, b = 2;
+a *= b += 3;</pre>
+            <p>Find a and b.</p>
+        </div>
+        <div class="card"><b>Question 20</b><span class="tag hard">Hard</span>
+            <pre>int a = 5, b = 10, c = 15;
+int r = a + b &gt; c || !(c - b == a);</pre>
+            <p>Find r.</p>
+        </div>
+        <div class="card"><b>Question 21</b><span class="tag hard">Hard</span>
+            <pre>int x = 7;
+x %= 4 + 1;
+x *= x &gt; 1;</pre>
+            <p>Find the final x.</p>
+        </div>
+        <div class="card"><b>Question 22</b><span class="tag hard">Hard</span>
+            <pre>int a = 1, b = 2, c = 3;
+int r = a == 1 || b++ &gt; 5 &amp;&amp; c--;</pre>
+            <p>Find r, b and c.</p>
+        </div>
+        <div class="card"><b>Question 23</b><span class="tag hard">Hard</span>
+            <pre>int x = 5, y = 0;
+int r = x &gt; 3 &amp;&amp; y++ &lt; 1;</pre>
+            <p>Find r and y.</p>
+        </div>
+        <div class="card"><b>Question 24</b><span class="tag hard">Hard</span>
+            <pre>int x = 3, y = 5;
+x += y;
+y -= x;
+x *= y;</pre>
+            <p>Find the final x and y.</p>
+        </div>
+        <div class="card"><b>Question 25</b><span class="tag hard">Hard</span>
+            <pre>int a = 7;
+int r = a &gt; 5 ? a *= 2 : a /= 2;</pre>
+            <p>Find r and a.</p>
+        </div>
+    </main>
+</body>
+
+</html>

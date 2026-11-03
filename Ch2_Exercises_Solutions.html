@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chapter 2: Coding Exercises, Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --fg: #1d2433;
+            --mu: #5b6475;
+            --ac: #1f5f8b;
+            --card: #fff;
+            --bd: #dfe3ea;
+            --code: #eef2f7;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #13171f;
+                --fg: #e8ebf1;
+                --mu: #98a2b3;
+                --ac: #6cb4e4;
+                --card: #1b212c;
+                --bd: #2c3442;
+                --code: #232b38;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #13171f;
+            --fg: #e8ebf1;
+            --mu: #98a2b3;
+            --ac: #6cb4e4;
+            --card: #1b212c;
+            --bd: #2c3442;
+            --code: #232b38;
+            color-scheme: dark
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 17px/1.65 Georgia, 'Times New Roman', serif
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 36px 20px 60px
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 38px);
+            line-height: 1.2;
+            text-align: center;
+            margin: .2em 0
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--mu);
+            margin-bottom: 28px
+        }
+
+        h2 {
+            margin-top: 2em;
+            padding-top: .4em;
+            border-top: 2px solid var(--ac);
+            font-size: 23px
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: .2em
+        }
+
+        .card,
+        .q {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 12px 0
+        }
+
+        .tag {
+            font: 600 12px system-ui;
+            border-radius: 10px;
+            padding: 2px 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+            background: var(--code);
+            color: var(--ac)
+        }
+
+        .easy {
+            color: #2e9b57
+        }
+
+        .medium {
+            color: #c98a00
+        }
+
+        .hard {
+            color: #c0392b
+        }
+
+        pre {
+            background: var(--code);
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        code {
+            background: var(--code);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font: .9em ui-monospace, Menlo, monospace
+        }
+
+        .mu {
+            color: var(--mu);
+            font-size: 15px
+        }
+
+        button {
+            font: 14px system-ui;
+            background: var(--ac);
+            color: var(--bg);
+            border: 0;
+            border-radius: 16px;
+            padding: 6px 16px;
+            cursor: pointer;
+            margin: 4px 6px 4px 0
+        }
+
+        button.on {
+            outline: 2px solid var(--fg)
+        }
+
+        .o {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font: 15px system-ui;
+            background: var(--code);
+            color: var(--fg);
+            border: 1px solid var(--bd)
+        }
+
+        .ok {
+            border-color: #2e9b57 !important;
+            background: rgba(46, 155, 87, .2) !important
+        }
+
+        .no {
+            border-color: #c0392b !important;
+            background: rgba(192, 57, 43, .2) !important
+        }
+
+        .why {
+            font: 14px system-ui;
+            color: var(--mu);
+            margin-top: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 style="font-size:xx-large; margin-bottom: -4%">
+            Fundamentals of Programming I
+        </h1>
+        <h2 style="text-align:center;">
+            Chapter 2 - Basic Programming Constructors
+             <br> Coding Exercises - Solutions
+        </h2>
+
+        <p style="text-align:center; margin-bottom: -5%">
+            Try each exercise first.
+            Many correct programs or solutions are exist, and yours may
+            differ and still be right.
+        </p>
+
+        <h2><span class="easy">Easy</span> level</h2>
+        <div class="card">
+            <h3>Exercise 1: Escape sequences</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Name:\tAbebe" &lt;&lt; endl;
+    cout &lt;&lt; "She said \"Hello\"" &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li><code>\t</code> prints a tab.</li>
+            <li><code>\"</code> prints a double quote inside a string.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Name:    Abebe
+She said "Hello"</pre>
+        <div class="card">
+            <h3>Exercise 2: Sum, difference and product</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b;
+    cout &lt;&lt; "Enter two integers: ";
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; "Sum: " &lt;&lt; a + b &lt;&lt; endl;
+    cout &lt;&lt; "Difference: " &lt;&lt; a - b &lt;&lt; endl;
+    cout &lt;&lt; "Product: " &lt;&lt; a * b &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li><code>cin &gt;&gt; a &gt;&gt; b;</code> reads both numbers.</li>
+            <li>Arithmetic can be done directly inside the <code>cout</code> chain.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Enter two integers: 7 3
+Sum: 10
+Difference: 4
+Product: 21</pre>
+        <div class="card">
+            <h3>Exercise 3: Rectangle area and perimeter</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double length, width;
+    cout &lt;&lt; "Length and width: ";
+    cin &gt;&gt; length &gt;&gt; width;
+    cout &lt;&lt; "Area: " &lt;&lt; length * width &lt;&lt; endl;
+    cout &lt;&lt; "Perimeter: " &lt;&lt; 2 * (length + width) &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Use <code>double</code>, not <code>int</code>, so decimals are not cut off.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Length and width: 5.5 2
+Area: 11
+Perimeter: 15</pre>
+        <div class="card">
+            <h3>Exercise 4: Simple interest</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double p, r, t;
+    cout &lt;&lt; "Principal, rate, time: ";
+    cin &gt;&gt; p &gt;&gt; r &gt;&gt; t;
+    double interest = p * r * t / 100;
+    cout &lt;&lt; "Simple interest: " &lt;&lt; interest &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Declare a variable for the result and give it a clear name.</li>
+            <li>Multiplying first and dividing last keeps the formula simple.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Principal, rate, time: 2000 5 3
+Simple interest: 300</pre>
+        <div class="card">
+            <h3>Exercise 5: Average of three numbers</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cout &lt;&lt; "Enter three integers: ";
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+    double average = (a + b + c) / 3.0;
+    cout &lt;&lt; "Average: " &lt;&lt; average &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Dividing by <code>3.0</code> (a real number) forces real division.</li>
+            <li>With <code>/ 3</code> the division would be an integer division and give 6.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Enter three integers: 5 6 8
+Average: 6.33333</pre>
+        <h2><span class="medium">Medium</span> level</h2>
+        <div class="card">
+            <h3>Exercise 6: Seconds to hours, minutes, seconds</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int total;
+    cout &lt;&lt; "Seconds: ";
+    cin &gt;&gt; total;
+    int hours = total / 3600;
+    int minutes = (total % 3600) / 60;
+    int seconds = total % 60;
+    cout &lt;&lt; hours &lt;&lt; " h " &lt;&lt; minutes &lt;&lt; " m " &lt;&lt; seconds &lt;&lt; " s" &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li><code>/</code> gives whole hours; <code>%</code> gives what is left over.</li>
+            <li>Remaining seconds after the hours: <code>total % 3600</code>. Divide that by 60 for minutes.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Seconds: 3725
+1 h 2 m 5 s</pre>
+        <div class="card">
+            <h3>Exercise 7: Largest of three (conditional operator)</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+    int big = (a &gt; b) ? ((a &gt; c) ? a : c)
+                      : ((b &gt; c) ? b : c);
+    cout &lt;&lt; "Largest: " &lt;&lt; big &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>First decide the winner of a and b, then compare that winner with c.</li>
+            <li>Conditional operators can be nested inside each other.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>4 9 6
+Largest: 9</pre>
+        <div class="card">
+            <h3>Exercise 8: Swap two numbers</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x, y, temp;
+    cin &gt;&gt; x &gt;&gt; y;
+    cout &lt;&lt; "Before: " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+    temp = x;
+    x = y;
+    y = temp;
+    cout &lt;&lt; "After:  " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Like swapping the contents of two cups: you need a third, empty cup (<code>temp</code>).</li>
+            <li>The order matters: save x in temp first, otherwise it is overwritten.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>10 25
+Before: 10 25
+After:  25 10</pre>
+        <div class="card">
+            <h3>Exercise 9: BMI with formatted output</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    double weight, height;
+    cin &gt;&gt; weight &gt;&gt; height;
+    double bmi = weight / (height * height);
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; setw(12) &lt;&lt; "Weight" &lt;&lt; setw(12) &lt;&lt; "Height" &lt;&lt; setw(12) &lt;&lt; "BMI" &lt;&lt; endl;
+    cout &lt;&lt; setw(12) &lt;&lt; weight &lt;&lt; setw(12) &lt;&lt; height &lt;&lt; setw(12) &lt;&lt; bmi &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Include <code>&lt;iomanip&gt;</code> for <code>setw</code> and <code>setprecision</code>.</li>
+            <li><code>setw</code> affects only the next value, so repeat it for each column.</li>
+            <li><code>fixed</code> with <code>setprecision(2)</code> prints exactly two decimals.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>70 1.75
+      Weight      Height         BMI
+       70.00        1.75       22.86</pre>
+        <div class="card">
+            <h3>Exercise 10: Sum of the digits of a 3-digit number</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    int hundreds = n / 100;
+    int tens = (n / 10) % 10;
+    int ones = n % 10;
+    cout &lt;&lt; "Digit sum: " &lt;&lt; hundreds + tens + ones &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li><code>n % 10</code> gives the last digit.</li>
+            <li><code>n / 100</code> gives the first digit (integer division drops the rest).</li>
+            <li><code>(n / 10) % 10</code> gives the middle digit.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>482
+Digit sum: 14</pre>
+        <h2><span class="hard">Hard</span> level</h2>
+        <div class="card">
+            <h3>Exercise 11: Leap year</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int year;
+    cin &gt;&gt; year;
+    bool leap = ((year % 4 == 0) &amp;&amp; (year % 100 != 0)) || (year % 400 == 0);
+    cout &lt;&lt; (leap ? "Leap year" : "Not leap year") &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>The rule is written directly as a logical expression with <code>&amp;&amp;</code> and <code>||</code>.
+            </li>
+            <li>Test the special cases: 1900 is divisible by 100 but not 400, so it is not a leap year.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>1900
+Not leap year</pre>
+        <div class="card">
+            <h3>Exercise 12: Reverse a 3-digit number</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    int reversed = (n % 10) * 100 + ((n / 10) % 10) * 10 + n / 100;
+    cout &lt;&lt; "Reversed: " &lt;&lt; reversed &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Take the last digit and give it the hundreds place, keep the middle digit in the tens place, and move
+                the first digit to the ones place.</li>
+            <li>For 120 the result is 021, but an integer does not store a leading zero, so it prints 21.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>123
+Reversed: 321</pre>
+        <div class="card">
+            <h3>Exercise 13: Distance between two points</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    double x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
+    double dx = x2 - x1, dy = y2 - y1;
+    double distance = sqrt(pow(dx, 2) + pow(dy, 2));
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; "Distance: " &lt;&lt; distance &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li><code>sqrt()</code> and <code>pow()</code> come from <code>&lt;cmath&gt;</code>.</li>
+            <li>Computing <code>dx</code> and <code>dy</code> first keeps the formula readable.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>1 2 4 6
+Distance: 5.00</pre>
+        <div class="card">
+            <h3>Exercise 14: Wrapping around</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    unsigned short n = 65535;
+    cout &lt;&lt; "Start:   " &lt;&lt; n &lt;&lt; endl;
+    n = n + 1;
+    cout &lt;&lt; "After +1: " &lt;&lt; n &lt;&lt; endl;
+    n = n - 1;
+    cout &lt;&lt; "After -1: " &lt;&lt; n &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>An unsigned short holds 0 to 65535. Going past the maximum wraps to 0, and going below 0 wraps to 65535.
+            </li>
+            <li>C++ gives no warning. This is the overflow idea from the notes.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>Start:   65535
+After +1: 0
+After -1: 65535</pre>
+        <div class="card">
+            <h3>Exercise 15: Bitwise operators</h3>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; "a &amp; b  = " &lt;&lt; (a &amp; b) &lt;&lt; endl;
+    cout &lt;&lt; "a | b  = " &lt;&lt; (a | b) &lt;&lt; endl;
+    cout &lt;&lt; "a ^ b  = " &lt;&lt; (a ^ b) &lt;&lt; endl;
+    cout &lt;&lt; "~a     = " &lt;&lt; (~a) &lt;&lt; endl;
+    cout &lt;&lt; "a &lt;&lt; 2 = " &lt;&lt; (a &lt;&lt; 2) &lt;&lt; endl;
+    cout &lt;&lt; "a &gt;&gt; 1 = " &lt;&lt; (a &gt;&gt; 1) &lt;&lt; endl;
+    cout &lt;&lt; (((a &amp; 1) ? "odd" : "even")) &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>Put brackets around bitwise expressions inside <code>cout</code>, because <code>&lt;&lt;</code> also
+                means output.</li>
+            <li>Shifting left by 2 multiplies by 4; shifting right by 1 divides by 2.</li>
+            <li>The last bit of an even number is 0, so <code>a &amp; 1</code> is 0 (false) for even numbers.</li>
+        </ul>
+        <p class="mu"><b>Sample run:</b></p>
+        <pre>8 3
+a &amp; b  = 0
+a | b  = 11
+a ^ b  = 11
+~a     = -9
+a &lt;&lt; 2 = 32
+a &gt;&gt; 1 = 4
+even</pre>
+        <h2 id="prec">Part 2: Operator precedence, solutions</h2>
+        <p class="mu">Compare your steps with these. The method matters as much as the final answer.</p>
+        <h3>A. Add brackets (no calculation)</h3>
+        <div class="card"><b>Question 1</b><span class="tag easy">Easy</span>
+            <pre>n &lt;= p &amp;&amp; n &gt;= p || n == 0</pre>
+            <p>Fully bracket the expression to show the order of evaluation.</p>
+            <p class="mu"><b>Steps:</b> Relational operators (<= and>=) first; then &amp;&amp; before ||.</p>
+            <p><b>Answer:</b> <code>(((n &lt;= p) &amp;&amp; (n &gt;= p)) || (n == 0))</code></p>
+        </div>
+        <div class="card"><b>Question 2</b><span class="tag easy">Easy</span>
+            <pre>a + b * c - d / e % f</pre>
+            <p>Fully bracket the expression.</p>
+            <p class="mu"><b>Steps:</b> *, / and % come before + and -. / and % are on the same level, so left to right:
+                (d / e) % f. Then + and - left to right.</p>
+            <p><b>Answer:</b> <code>((a + (b * c)) - ((d / e) % f))</code></p>
+        </div>
+        <div class="card"><b>Question 3</b><span class="tag medium">Medium</span>
+            <pre>x += y = z * 2</pre>
+            <p>Fully bracket the expression.</p>
+            <p class="mu"><b>Steps:</b> * first. Assignment operators are right to left, so y = (z * 2) happens before x
+                += ...</p>
+            <p><b>Answer:</b> <code>x += (y = (z * 2))</code></p>
+        </div>
+        <div class="card"><b>Question 4</b><span class="tag medium">Medium</span>
+            <pre>!a == b &amp;&amp; c</pre>
+            <p>Fully bracket the expression.</p>
+            <p class="mu"><b>Steps:</b> ! (unary) is higher than ==, and == is higher than &amp;&amp;.</p>
+            <p><b>Answer:</b> <code>(((!a) == b) &amp;&amp; c)</code></p>
+        </div>
+        <div class="card"><b>Question 5</b><span class="tag hard">Hard</span>
+            <pre>a = b &gt; c ? d : e + 1</pre>
+            <p>Fully bracket the expression.</p>
+            <p class="mu"><b>Steps:</b> Relational &gt; and + first. ?: is lower than those, and = is lowest, so it
+                takes the whole conditional as its value.</p>
+            <p><b>Answer:</b> <code>a = ((b &gt; c) ? d : (e + 1))</code></p>
+        </div>
+        <h3>B. Work out the result by hand</h3>
+        <div class="card"><b>Question 6</b><span class="tag easy">Easy</span>
+            <pre>int r = 2 + 3 * 4;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> 3 * 4 = 12, then 2 + 12 = 14.</p>
+            <p><b>Answer:</b> <code>r = 14</code></p>
+        </div>
+        <div class="card"><b>Question 7</b><span class="tag easy">Easy</span>
+            <pre>int r = 20 - 6 / 2 + 1;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> 6 / 2 = 3. Then left to right: 20 - 3 = 17, 17 + 1 = 18.</p>
+            <p><b>Answer:</b> <code>r = 18</code></p>
+        </div>
+        <div class="card"><b>Question 8</b><span class="tag easy">Easy</span>
+            <pre>int r = 17 % 5 * 2;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> % and * are on the same level, so left to right: 17 % 5 = 2, then 2 * 2 = 4.</p>
+            <p><b>Answer:</b> <code>r = 4</code></p>
+        </div>
+        <div class="card"><b>Question 9</b><span class="tag easy">Easy</span>
+            <pre>int r = 10 / 4 * 2;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> Same level, left to right. 10 / 4 is integer division = 2 (not 2.5). Then 2 * 2
+                = 4.</p>
+            <p><b>Answer:</b> <code>r = 4</code></p>
+        </div>
+        <div class="card"><b>Question 10</b><span class="tag easy">Easy</span>
+            <pre>int r = 3 + 4 &gt; 6;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> + is higher than &gt;. 3 + 4 = 7, then 7 &gt; 6 is true, which is 1.</p>
+            <p><b>Answer:</b> <code>r = 1</code></p>
+        </div>
+        <div class="card"><b>Question 11</b><span class="tag medium">Medium</span>
+            <pre>int a = 5, b = 3;
+a += b * 2;</pre>
+            <p>Find a and b.</p>
+            <p class="mu"><b>Steps:</b> Assignment is lowest, so the right side is calculated first: b * 2 = 6. Then a =
+                5 + 6 = 11. b is unchanged.</p>
+            <p><b>Answer:</b> <code>a = 11, b = 3</code></p>
+        </div>
+        <div class="card"><b>Question 12</b><span class="tag medium">Medium</span>
+            <pre>int x = 10, y = 4;
+x -= y + 2;</pre>
+            <p>Find x and y.</p>
+            <p class="mu"><b>Steps:</b> y + 2 = 6 first. Then x = 10 - 6 = 4. (It is not (x -= y) + 2.)</p>
+            <p><b>Answer:</b> <code>x = 4, y = 4</code></p>
+        </div>
+        <div class="card"><b>Question 13</b><span class="tag medium">Medium</span>
+            <pre>int a = 12, b = 5;
+a %= b + 1;</pre>
+            <p>Find a.</p>
+            <p class="mu"><b>Steps:</b> b + 1 = 6 first. Then a = 12 % 6 = 0.</p>
+            <p><b>Answer:</b> <code>a = 0</code></p>
+        </div>
+        <div class="card"><b>Question 14</b><span class="tag medium">Medium</span>
+            <pre>int a = 3, b = 7, c = 5;
+int r = a &gt; b || c == 5 &amp;&amp; b &gt; a;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> &amp;&amp; is higher than ||, so it is a &gt; b || (c == 5 &amp;&amp; b &gt; a).
+                a &gt; b is 0. c == 5 is 1 and b &gt; a is 1, so 1 &amp;&amp; 1 = 1. Then 0 || 1 = 1.</p>
+            <p><b>Answer:</b> <code>r = 1</code></p>
+        </div>
+        <div class="card"><b>Question 15</b><span class="tag medium">Medium</span>
+            <pre>int x = 5;
+int r = !x &gt; 3;</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> ! is higher than &gt;. !x: x is non-zero (true), so !x = 0. Then 0 &gt; 3 is
+                false = 0. (It is not !(x &gt; 3).)</p>
+            <p><b>Answer:</b> <code>r = 0</code></p>
+        </div>
+        <div class="card"><b>Question 16</b><span class="tag medium">Medium</span>
+            <pre>int a = 5;
+a += a &gt; 3;</pre>
+            <p>Find a.</p>
+            <p class="mu"><b>Steps:</b> a &gt; 3 is true, which is 1. Then a = 5 + 1 = 6.</p>
+            <p><b>Answer:</b> <code>a = 6</code></p>
+        </div>
+        <div class="card"><b>Question 17</b><span class="tag hard">Hard</span>
+            <pre>int x = 4, y = 9;
+x += y &gt; 5 &amp;&amp; x &lt; 10;</pre>
+            <p>Find x.</p>
+            <p class="mu"><b>Steps:</b> Right side first: y &gt; 5 is 1; x &lt; 10 is 1; 1 &amp;&amp; 1 = 1. Then x = 4
+                + 1 = 5.</p>
+            <p><b>Answer:</b> <code>x = 5</code></p>
+        </div>
+        <div class="card"><b>Question 18</b><span class="tag hard">Hard</span>
+            <pre>int a = 6, b = 4;
+a -= b *= 2;</pre>
+            <p>Find a and b.</p>
+            <p class="mu"><b>Steps:</b> Assignments go right to left. b *= 2 makes b = 8 (value 8). Then a = 6 - 8 = -2.
+            </p>
+            <p><b>Answer:</b> <code>a = -2, b = 8</code></p>
+        </div>
+        <div class="card"><b>Question 19</b><span class="tag hard">Hard</span>
+            <pre>int a = 5, b = 2;
+a *= b += 3;</pre>
+            <p>Find a and b.</p>
+            <p class="mu"><b>Steps:</b> Right to left. b += 3 makes b = 5. Then a = 5 * 5 = 25.</p>
+            <p><b>Answer:</b> <code>a = 25, b = 5</code></p>
+        </div>
+        <div class="card"><b>Question 20</b><span class="tag hard">Hard</span>
+            <pre>int a = 5, b = 10, c = 15;
+int r = a + b &gt; c || !(c - b == a);</pre>
+            <p>Find r.</p>
+            <p class="mu"><b>Steps:</b> a + b = 15, and 15 &gt; 15 is 0. In the brackets, c - b = 5 and 5 == 5 is 1, so
+                !1 = 0. Then 0 || 0 = 0.</p>
+            <p><b>Answer:</b> <code>r = 0</code></p>
+        </div>
+        <div class="card"><b>Question 21</b><span class="tag hard">Hard</span>
+            <pre>int x = 7;
+x %= 4 + 1;
+x *= x &gt; 1;</pre>
+            <p>Find the final x.</p>
+            <p class="mu"><b>Steps:</b> Line 2: 4 + 1 = 5, so x = 7 % 5 = 2. Line 3: x &gt; 1 is 2 &gt; 1 = 1, so x = 2
+                * 1 = 2.</p>
+            <p><b>Answer:</b> <code>x = 2</code></p>
+        </div>
+        <div class="card"><b>Question 22</b><span class="tag hard">Hard</span>
+            <pre>int a = 1, b = 2, c = 3;
+int r = a == 1 || b++ &gt; 5 &amp;&amp; c--;</pre>
+            <p>Find r, b and c.</p>
+            <p class="mu"><b>Steps:</b> &amp;&amp; is higher than ||, so it is (a == 1) || ((b++ &gt; 5) &amp;&amp;
+                c--). The left side a == 1 is true, so || does not evaluate the right side at all (short-circuit). b++
+                and c-- never run.</p>
+            <p><b>Answer:</b> <code>r = 1, b = 2, c = 3</code></p>
+        </div>
+        <div class="card"><b>Question 23</b><span class="tag hard">Hard</span>
+            <pre>int x = 5, y = 0;
+int r = x &gt; 3 &amp;&amp; y++ &lt; 1;</pre>
+            <p>Find r and y.</p>
+            <p class="mu"><b>Steps:</b> x &gt; 3 is true, so the right side is evaluated. y++ gives the old value 0 (and
+                then y becomes 1). 0 &lt; 1 is true. So 1 &amp;&amp; 1 = 1.</p>
+            <p><b>Answer:</b> <code>r = 1, y = 1</code></p>
+        </div>
+        <div class="card"><b>Question 24</b><span class="tag hard">Hard</span>
+            <pre>int x = 3, y = 5;
+x += y;
+y -= x;
+x *= y;</pre>
+            <p>Find the final x and y.</p>
+            <p class="mu"><b>Steps:</b> Line 1: x = 3 + 5 = 8. Line 2: y = 5 - 8 = -3. Line 3: x = 8 * (-3) = -24.</p>
+            <p><b>Answer:</b> <code>x = -24, y = -3</code></p>
+        </div>
+        <div class="card"><b>Question 25</b><span class="tag hard">Hard</span>
+            <pre>int a = 7;
+int r = a &gt; 5 ? a *= 2 : a /= 2;</pre>
+            <p>Find r and a.</p>
+            <p class="mu"><b>Steps:</b> The condition a &gt; 5 is true, so only the first branch runs: a *= 2 makes a =
+                14, and the value 14 goes to r. The branch a /= 2 is never evaluated.</p>
+            <p><b>Answer:</b> <code>r = 14, a = 14</code></p>
+        </div>
+    </main>
+</body>
+
+</html>

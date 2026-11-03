@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chapter 2 Multiple-Choice Questions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --fg: #1d2433;
+            --mu: #5b6475;
+            --ac: #1f5f8b;
+            --card: #fff;
+            --bd: #dfe3ea;
+            --code: #eef2f7;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #13171f;
+                --fg: #e8ebf1;
+                --mu: #98a2b3;
+                --ac: #6cb4e4;
+                --card: #1b212c;
+                --bd: #2c3442;
+                --code: #232b38;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #13171f;
+            --fg: #e8ebf1;
+            --mu: #98a2b3;
+            --ac: #6cb4e4;
+            --card: #1b212c;
+            --bd: #2c3442;
+            --code: #232b38;
+            color-scheme: dark
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 17px/1.65 Georgia, 'Times New Roman', serif
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 36px 20px 60px
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 38px);
+            line-height: 1.2;
+            text-align: center;
+            margin: .2em 0
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--mu);
+            margin-bottom: 28px
+        }
+
+        h2 {
+            margin-top: 2em;
+            padding-top: .4em;
+            border-top: 2px solid var(--ac);
+            font-size: 23px
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: .2em
+        }
+
+        .card,
+        .q {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 12px 0
+        }
+
+        .tag {
+            font: 600 12px system-ui;
+            border-radius: 10px;
+            padding: 2px 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+            background: var(--code);
+            color: var(--ac)
+        }
+
+        .easy {
+            color: #2e9b57
+        }
+
+        .medium {
+            color: #c98a00
+        }
+
+        .hard {
+            color: #c0392b
+        }
+
+        pre {
+            background: var(--code);
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        code {
+            background: var(--code);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font: .9em ui-monospace, Menlo, monospace
+        }
+
+        .mu {
+            color: var(--mu);
+            font-size: 15px
+        }
+
+        button {
+            font: 14px system-ui;
+            background: var(--ac);
+            color: var(--bg);
+            border: 0;
+            border-radius: 16px;
+            padding: 6px 16px;
+            cursor: pointer;
+            margin: 4px 6px 4px 0
+        }
+
+        button.on {
+            outline: 2px solid var(--fg)
+        }
+
+        .o {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font: 15px system-ui;
+            background: var(--code);
+            color: var(--fg);
+            border: 1px solid var(--bd)
+        }
+
+        .ok {
+            border-color: #2e9b57 !important;
+            background: rgba(46, 155, 87, .2) !important
+        }
+
+        .no {
+            border-color: #c0392b !important;
+            background: rgba(192, 57, 43, .2) !important
+        }
+
+        .why {
+            font: 14px system-ui;
+            color: var(--mu);
+            margin-top: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 style="font-size:xx-large; margin-bottom: -4%">
+            Fundamentals of Programming I
+        </h1>
+        <h2 style="text-align:center; margin-bottom: -3%;">
+            Chapter 2 - Basic Programming Constructors
+        </h2>
+        <h2 style="text-align:center; font-size: medium; margin-bottom: -2%; border-spacing: 0px;">
+          <p style ="margin-bottom: -1%; "></p>
+          Rervision Quiz: Multiple-Choice Questions
+        </h2>
+
+        <p class="sub">36 Questions in Three Levels</p>
+        <p style="text-align:center"><button id="f_all" class="on">All</button><button id="f_Easy">Easy</button><button
+                id="f_Medium">Medium</button><button id="f_Hard">Hard</button></p>
+        <p id="score" class="mu" style="text-align:center"></p>
+        <div id="quiz"></div>
+
+        <p style="text-align:center"><button id="rst">Start again</button><button id="keyb">Show answer key</button></p>
+        <div id="key" class="card" hidden></div>
+    </main>
+    <script>(function () {
+            var Q = [["Easy", "Who created C++?", "Bjarne Stroustrup", "Dennis Ritchie", "Ken Thompson", "James Gosling", ""], ["Easy", "Which file extension is used for C++ source files?", ".cpp", ".exe", ".obj", ".java", ""], ["Easy", "Which statement prints text on the screen?", "cout << \"Hi\";", "cin >> \"Hi\";", "print \"Hi\";", "echo \"Hi\";", ""], ["Easy", "Every executable C++ statement ends with…", "a semicolon ;", "a period .", "a colon :", "a comma ,", ""], ["Easy", "Which symbol starts a single-line comment?", "//", "/*", "#", "<!--", ""], ["Easy", "Which header is needed for cin and cout?", "iostream", "iomanip", "cmath", "cstring", ""], ["Easy", "Which is a valid variable name?", "total_marks", "2total", "total-marks", "total marks", ""], ["Easy", "Which type stores whole numbers?", "int", "double", "char", "bool", ""], ["Easy", "Which type stores only true or false?", "bool", "int", "char", "float", ""], ["Easy", "What does return 0; at the end of main mean?", "The program ended normally", "The program had an error", "The loop ended", "A comment follows", ""], ["Easy", "Which operator gives the remainder of a division?", "%", "/", "*", "#", ""], ["Easy", "Which keyword creates a constant?", "const", "constant", "fixed", "let", ""], ["Medium", "Which phase combines object code with library code to make the executable?", "Linking", "Preprocessing", "Loading", "Editing", "The linker fills in the “holes” in object code using library code."], ["Medium", "What does  cout << 7 / 2;  print?", "3", "3.5", "4", "3.0", "Both operands are int, so integer division drops the fraction."], ["Medium", "What is 7 % 3?", "1", "2", "3", "0", "7 divided by 3 is 2 with remainder 1."], ["Medium", "int a = 5;  cout << a++;  prints…", "5", "6", "4", "7", "Postfix: the old value is used first, then a becomes 6."], ["Medium", "int a = 5;  cout << ++a;  prints…", "6", "5", "4", "7", "Prefix: a is increased first, then used."], ["Medium", "After  int x = 10; x -= 4; x *= 2;  x is…", "12", "6", "16", "20", "x becomes 6, then 6 * 2 = 12."], ["Medium", "What happens in  int i = 5.5; ?", "i becomes 5 (the fraction is dropped)", "i becomes 6", "i becomes 5.5", "It will not compile", "Assigning a double to an int truncates the fraction."], ["Medium", "Which line replaces the word PI with 3.14 before compilation?", "#define PI 3.14", "const PI = 3.14;", "int PI = 3.14;", "PI == 3.14;", "#define is a preprocessor text substitution."], ["Medium", "A variable declared inside a block { } can be used…", "only inside that block", "anywhere in the file", "only in other functions", "nowhere", "That is its scope: from the declaration to the closing brace."], ["Medium", "What is the difference between = and == ?", "= assigns a value, == compares two values", "They are the same", "= compares, == assigns", "== joins two strings", "A common beginner mix-up: if (x = 5) assigns instead of comparing."], ["Medium", "What is the value of  (5 > 3) && (2 > 4) ?", "false (0)", "true (1)", "5", "4", "The second part is false, and AND needs both to be true."], ["Medium", "On a typical 32-bit compiler, sizeof(int) is…", "4 bytes", "1 byte", "2 bytes", "8 bytes", "Old 16-bit compilers used 2 bytes. Always check with sizeof."], ["Hard", "int x = 5, y = 5;  cout << ++x << y--;  prints…", "65", "55", "66", "64", "++x prints 6; y-- prints the old value 5 and then lowers y."], ["Hard", "int a = 2, b = 3;  cout << a + b * 2 - 1;  prints…", "7", "9", "5", "3", "* goes first: 3*2 = 6, then 2 + 6 - 1 = 7."], ["Hard", "cout << (double)(5 / 2);  prints…", "2", "2.5", "3", "2.0 and then an error", "5/2 is integer division (2), and only then is it converted to 2.0 (printed as 2)."], ["Hard", "double avg = (1 + 2) / 2;  What is avg?", "1", "1.5", "2", "0", "(1+2)/2 is integer division, so 3/2 = 1, stored as 1.0."], ["Hard", "unsigned short n = 65535; n = n + 1;  What is n?", "0", "65536", "-1", "an error message", "Unsigned values wrap around past the maximum."], ["Hard", "What is 12 & 10 (bitwise AND)?", "8", "2", "14", "22", "1100 AND 1010 = 1000, which is 8."], ["Hard", "What is 1 << 3 ?", "8", "3", "6", "4", "Shifting left by 3 multiplies by 2 three times: 1 × 8."], ["Hard", "enum Color { RED = 100, BLUE, GREEN = 500, WHITE };  What is WHITE?", "501", "101", "500", "3", "After GREEN = 500, the next one continues with 501."], ["Hard", "char c = 'a'; c += 2; cout << c;  prints…", "c", "2", "a2", "99", "'a' is ASCII 97; adding 2 gives 99, which prints as the character c."], ["Hard", "int x = 1; { int x = 2; }  cout << x;  prints…", "1", "2", "3", "nothing (an error)", "The inner x lives only inside the braces. The outer x is still 1."], ["Hard", "In  a == b + c * d , which operation runs first?", "c * d", "b + c", "a == b", "They all run together", "* has higher precedence than + , which is higher than ==."], ["Hard", "int a = 7; int b = a > 5 ? a * 2 : a / 2;  b is…", "14", "3", "7", "5", "The condition is true, so the value is a * 2 = 14."]];
+            var qz = document.getElementById('quiz'), sc = document.getElementById('score'), kd = document.getElementById('key'), n, r, keys, lvl = 'all', tot;
+            function sh(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t } return a }
+            function upd() { sc.textContent = 'Score: ' + r + ' / ' + tot + '  ·  answered ' + n }
+            function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;') }
+            function build() {
+                qz.innerHTML = ''; kd.hidden = true; n = 0; r = 0; keys = []; var list = Q.filter(function (q) { return lvl === 'all' || q[0] === lvl }); tot = list.length; upd();
+                list.forEach(function (q, i) {
+                    var o = sh(q.slice(2, 6)), ci = o.indexOf(q[2]); keys.push((i + 1) + '-' + 'ABCD'.charAt(ci));
+                    var d = document.createElement('div'); d.className = 'q'; d.innerHTML = '<b>' + (i + 1) + '. ' + esc(q[1]) + '</b> <span class="tag ' + q[0].toLowerCase() + '">' + q[0] + '</span>';
+                    var w = document.createElement('div'); w.className = 'why'; w.hidden = true; var done = false, bs = [];
+                    o.forEach(function (t, j) {
+                        var b = document.createElement('button'); b.className = 'o'; b.textContent = 'ABCD'.charAt(j) + '. ' + t; bs.push(b);
+                        b.onclick = function () { if (done) return; done = true; n++; if (j === ci) { r++; b.classList.add('ok'); w.textContent = 'Correct. ' + q[6] } else { b.classList.add('no'); bs[ci].classList.add('ok'); w.textContent = 'Not quite. The answer is ' + 'ABCD'.charAt(ci) + '. ' + q[6] } w.hidden = false; upd() }; d.appendChild(b)
+                    });
+                    d.appendChild(w); qz.appendChild(d)
+                })
+            }
+            ['all', 'Easy', 'Medium', 'Hard'].forEach(function (f) { var b = document.getElementById('f_' + f); b.onclick = function () { lvl = f;['all', 'Easy', 'Medium', 'Hard'].forEach(function (g) { document.getElementById('f_' + g).classList.remove('on') }); b.classList.add('on'); build() } });
+            document.getElementById('rst').onclick = build;
+            document.getElementById('keyb').onclick = function () { kd.textContent = 'Answer key: ' + keys.join(',  '); kd.hidden = !kd.hidden };
+            build()
+        })();</script>
+</body>
+
+</html>

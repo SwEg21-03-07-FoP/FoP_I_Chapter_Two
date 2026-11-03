@@ -176,6 +176,28 @@
             color: var(--mu);
             margin-top: 6px
         }
+
+        .q {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 10px
+        }
+
+        .q>div,
+        .q>b {
+            grid-column: 1/-1
+        }
+
+        .q .o {
+            margin: 0;
+            height: 100%
+        }
+
+        @media(max-width:560px) {
+            .q {
+                grid-template-columns: 1fr
+            }
+        }
     </style>
 </head>
 
@@ -211,7 +233,7 @@
                 qz.innerHTML = ''; kd.hidden = true; n = 0; r = 0; keys = []; var list = Q.filter(function (q) { return lvl === 'all' || q[0] === lvl }); tot = list.length; upd();
                 list.forEach(function (q, i) {
                     var o = sh(q.slice(2, 6)), ci = o.indexOf(q[2]); keys.push((i + 1) + '-' + 'ABCD'.charAt(ci));
-                    var d = document.createElement('div'); d.className = 'q'; d.innerHTML = '<b>' + (i + 1) + '. ' + esc(q[1]) + '</b> <span class="tag ' + q[0].toLowerCase() + '">' + q[0] + '</span>';
+                    var d = document.createElement('div'); d.className = 'q'; d.innerHTML = '<div><b>' + (i + 1) + '. ' + esc(q[1]) + '</b> <span class="tag ' + q[0].toLowerCase() + '">' + q[0] + '</span></div>';
                     var w = document.createElement('div'); w.className = 'why'; w.hidden = true; var done = false, bs = [];
                     o.forEach(function (t, j) {
                         var b = document.createElement('button'); b.className = 'o'; b.textContent = 'ABCD'.charAt(j) + '. ' + t; bs.push(b);

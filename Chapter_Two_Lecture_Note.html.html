@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Fundamentals of Programming I – Chapter 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --fg: #1d2433;
+            --mu: #5b6475;
+            --ac: #1f5f8b;
+            --card: #fff;
+            --bd: #dfe3ea;
+            --code: #eef2f7;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #13171f;
+                --fg: #e8ebf1;
+                --mu: #98a2b3;
+                --ac: #6cb4e4;
+                --card: #1b212c;
+                --bd: #2c3442;
+                --code: #232b38;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #13171f;
+            --fg: #e8ebf1;
+            --mu: #98a2b3;
+            --ac: #6cb4e4;
+            --card: #1b212c;
+            --bd: #2c3442;
+            --code: #232b38;
+            color-scheme: dark
+        }
+
+        html {
+            scroll-padding-top: 70px;
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 17px/1.65 Georgia, 'Times New Roman', serif
+        }
+
+        nav {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--bd);
+            padding: 10px 16px;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            white-space: nowrap;
+            z-index: 5;
+            font: 14px system-ui, sans-serif
+        }
+
+        nav a {
+            color: var(--mu);
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 14px
+        }
+
+        nav a:hover {
+            background: var(--code);
+            color: var(--ac)
+        }
+
+        nav b {
+            display: none
+        }
+
+        @media(min-width:900px) {
+            html {
+                scroll-padding-top: 20px
+            }
+
+            body {
+                padding-left: 250px
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 250px;
+                box-sizing: border-box;
+                flex-direction: column;
+                gap: 2px;
+                padding: calc(24px + env(safe-area-inset-top, 0px)) 14px 24px;
+                border-bottom: 0;
+                border-right: 1px solid var(--bd);
+                overflow-y: auto;
+                white-space: normal;
+                font-size: 15px
+            }
+
+            nav b {
+                display: block;
+                font: 700 12px system-ui;
+                letter-spacing: .08em;
+                text-transform: uppercase;
+                color: var(--ac);
+                padding: 0 10px 10px
+            }
+
+            nav a {
+                border-radius: 8px;
+                padding: 7px 10px
+            }
+        }
+
+        header {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 48px 20px 8px
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.15;
+            margin: .3em 0;
+            text-align: center
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px 60px
+        }
+
+        h2 {
+            margin-top: 2.4em;
+            padding-top: .4em;
+            border-top: 2px solid var(--ac);
+            font-size: 26px
+        }
+
+        h3 {
+            margin-bottom: .2em;
+            font-size: 19px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 12px 0
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px
+        }
+
+        .grid .card {
+            margin: 0
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--ac)
+        }
+
+        ol.steps {
+            counter-reset: s;
+            list-style: none;
+            padding: 0
+        }
+
+        ol.steps li {
+            counter-increment: s;
+            margin: 8px 0;
+            padding-left: 44px;
+            position: relative
+        }
+
+        ol.steps li:before {
+            content: counter(s);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--ac);
+            color: var(--bg);
+            font: 700 15px/30px system-ui;
+            text-align: center
+        }
+
+        ol.steps ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 6px 0 4px
+        }
+
+        ol.steps ul li {
+            counter-increment: none;
+            padding-left: 0;
+            margin: 5px 0
+        }
+
+        ol.steps ul li:before {
+            content: none
+        }
+
+        .tw {
+            overflow-x: auto
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 15px
+        }
+
+        th,
+        td {
+            border: 1px solid var(--bd);
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            background: var(--code);
+            font-family: system-ui
+        }
+
+        pre {
+            background: var(--code);
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        code {
+            background: var(--code);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font: .9em ui-monospace, Menlo, monospace
+        }
+
+        details {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin: 10px 0
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--ac);
+            font-family: system-ui
+        }
+
+        .tip {
+            background: var(--code);
+            border-left: 4px solid var(--ac);
+            border-radius: 6px;
+            padding: 10px 16px;
+            margin: 14px 0;
+            font-size: 16px
+        }
+
+        .tip b:first-child {
+            display: block;
+            font: 700 12px system-ui;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--ac);
+            margin-bottom: 2px
+        }
+
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            font: 14px system-ui;
+            margin: 12px 0
+        }
+
+        .flow span {
+            border: 2px solid var(--ac);
+            border-radius: 8px;
+            padding: 6px 10px;
+            background: var(--card)
+        }
+
+        .flow i {
+            color: var(--ac);
+            font-style: normal
+        }
+
+        dt {
+            font-weight: 700;
+            margin-top: 10px
+        }
+
+        dd {
+            margin: 0 0 0 18px;
+            color: var(--mu)
+        }
+
+        footer {
+            text-align: center;
+            color: var(--mu);
+            font: 14px system-ui;
+            padding: 30px 20px
+        }
+
+        .exq,
+        .qz .q {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 12px 0
+        }
+
+        .exq textarea {
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 80px;
+            background: var(--code);
+            color: var(--fg);
+            border: 1px solid var(--bd);
+            border-radius: 8px;
+            padding: 8px;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        .btn {
+            font: 14px system-ui;
+            background: var(--ac);
+            color: var(--bg);
+            border: 0;
+            border-radius: 16px;
+            padding: 6px 16px;
+            cursor: pointer;
+            margin-top: 8px
+        }
+
+        .btn:disabled {
+            opacity: .5;
+            cursor: default
+        }
+
+        .msg {
+            font: 14px system-ui;
+            color: var(--mu);
+            margin-left: 8px
+        }
+
+        .sol {
+            margin-top: 10px;
+            border-top: 1px dashed var(--bd);
+            padding-top: 8px
+        }
+
+        .qz button.o {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font: 15px system-ui;
+            background: var(--code);
+            color: var(--fg);
+            border: 1px solid var(--bd);
+            cursor: pointer
+        }
+
+        .ok {
+            border-color: #2e9b57 !important;
+            background: rgba(46, 155, 87, .2) !important
+        }
+
+        .no {
+            border-color: #c0392b !important;
+            background: rgba(192, 57, 43, .2) !important
+        }
+
+        .why {
+            font: 14px system-ui;
+            color: var(--mu);
+            margin-top: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <b>Chapter 2 contents</b>
+        <a href="#about">C++ Overview</a>
+        <a href="#anatomy">Program Anatomy</a>
+        <a href="#compile">Compilation Process</a>
+        <a href="#pre">Preprocessor Directive</a>
+        <a href="#io">Input / output Stream</a>
+        <a href="#vars">Variables & Data Types</a>
+        <a href="#consts">Constants and Literals</a>
+        <a href="#ops">Operators and Expressions</a>
+        <a href="#style">Program Formatting</a>
+        <a href="#errors">Program Errors and Debugging </a>
+        <a href="#fmt">Formatted I/O</a>
+        <a href="#worked">Worked Programs</a>
+        <a href="#practice">Practice Exercises</a>
+        <a href="#gloss">Glossary</a>
+        <a href="#check">Self-check Quiz</a>
+        </nav>
+    <header>
+        <h1>Chapter Two<br>Basic Programming Constructors</h1>
+        <p style="color:var(--mu);text-align:center">
+            Program structure, Compilation, Input/Output, Variables, 
+            Constants, Operators, Program Errors, and Program Formatting.</p>
+        <div class="tip"><b>New to C++? Start here</b>Chapter 1 taught you to plan a solution. Now you start
+            <b>writing</b> it in a real language, C++. Read the sections in order, look for the shaded “In plain words”
+            boxes, and type every code example yourself in an editor. Reading code is not enough; running it is how you
+            learn. Each section’s ideas build on the one before it.</div>
+    </header>
+    <main>
+        <h2 id="about">1. An Overview of C++</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Where it came from</h3>
+                <ul>
+                    <li>Created by <b>Bjarne Stroustrup</b> at AT&amp;T Bell Laboratories in the early 1980s.</li>
+                    <li>First called “C with classes”; renamed C++ in 1983.</li>
+                    <li>Combines the power of C with object-oriented features (ideas from Simula67).</li>
+                    <li>C++ is a <b>superset</b> of C: any valid C program is also a valid C++ program.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>What it is used for</h3>
+                <ul>
+                    <li>Operating systems, compilers and new programming languages.</li>
+                    <li>Programs for Linux, Windows, Macintosh, Unix and more.</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Why use C++?</h3>
+        <ul>
+            <li><b>Object-oriented:</b> programs are built from cooperating objects, which gives code reuse and easier
+                maintenance.</li>
+            <li><b>Portable:</b> the same code can be compiled on almost any computer and operating system.</li>
+            <li><b>Concise:</b> shorthand symbols keep programs short.</li>
+            <li><b>Modular:</b> a program can be split across several source files compiled separately and linked
+                together. Changing one file does not mean recompiling everything.</li>
+            <li><b>Compatible with C:</b> C code can be included in C++ programs.</li>
+            <li><b>Fast:</b> it is high-level, yet can reach low-level features such as memory addresses.</li>
+            <li><b>Generic programming:</b> templates and the Standard Template Library (STL) let one algorithm work on
+                different data types.</li>
+        </ul>
+        <h3>Challenges</h3>
+        <ul>
+            <li>C++ is complex. Full use of the STL needs pointers, references, templates and classes.</li>
+            <li>It is performance-centric: the compiler often does <b>not</b> warn you about mistakes such as using an
+                uninitialized variable or an array index out of range.</li>
+        </ul>
+        <div class="tip"><b>In plain words</b>C++ is like a powerful manual car: fast and flexible, but it trusts the
+            driver. Learn the basics carefully, because C++ will not always warn you when you make a mistake.</div>
+        <details>
+            <summary>Common C++ compilers and IDEs</summary>
+            <div class="tw">
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Note</th>
+                    </tr>
+                    <tr>
+                        <td>Code::Blocks</td>
+                        <td>Free, cross-platform C/C++ IDE</td>
+                    </tr>
+                    <tr>
+                        <td>Dev-C++</td>
+                        <td>Open-source IDE, Windows only</td>
+                    </tr>
+                    <tr>
+                        <td>CodeLite</td>
+                        <td>Open-source, cross-platform IDE</td>
+                    </tr>
+                    <tr>
+                        <td>GNU C++ (g++)</td>
+                        <td>The GCC compiler for C++</td>
+                    </tr>
+                    <tr>
+                        <td>MinGW</td>
+                        <td>GCC tools for native Windows applications</td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft Visual C++</td>
+                        <td>Compiler and IDE from Microsoft</td>
+                    </tr>
+                    <tr>
+                        <td>Borland / Turbo C++, Zortech</td>
+                        <td>Older DOS-era compilers</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+        <h2 id="anatomy">2. Anatomy of a C++ Program</h2>
+        <p>Here is the classic first program. Type it into your editor, save it as <code>hello.cpp</code>, compile it
+            and run it.</p>
+        <pre>// First C++ program
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; "Hello World!";
+    return 0;
+}</pre>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Line</th>
+                    <th>What it does</th>
+                </tr>
+                <tr>
+                    <td>// First C++ program</td>
+                    <td>A comment. The compiler ignores it.</td>
+                </tr>
+                <tr>
+                    <td>#include &lt;iostream&gt;</td>
+                    <td>Preprocessor directive: brings in the input/output library.</td>
+                </tr>
+                <tr>
+                    <td>using namespace std;</td>
+                    <td>Lets you write cout instead of std::cout.</td>
+                </tr>
+                <tr>
+                    <td>int main()</td>
+                    <td>Where the program starts. Every C++ program must have exactly one main().</td>
+                </tr>
+                <tr>
+                    <td>{ ... }</td>
+                    <td>Braces mark the beginning and end of the function body (a block).</td>
+                </tr>
+                <tr>
+                    <td>cout &lt;&lt; "Hello World!";</td>
+                    <td>A statement that sends text to the screen.</td>
+                </tr>
+                <tr>
+                    <td>return 0;</td>
+                    <td>Tells the operating system the program ended normally.</td>
+                </tr>
+            </table>
+        </div>
+        <ul>
+            <li>Source files are saved with the extension <code>.cpp</code>.</li>
+            <li>Every executable statement ends with a semicolon <code>;</code>. Directives (#include),
+                <code>main()</code> and braces do not.</li>
+            <li>Every <code>{</code> needs a matching <code>}</code>.</li>
+            <li><code>return 0;</code> means normal termination; non-zero means abnormal termination. You can also write
+                <code>EXIT_SUCCESS</code> or <code>EXIT_FAILURE</code> (needs <code>#include &lt;cstdlib&gt;</code>). In
+                modern C++ the compiler adds <code>return 0;</code> for you in main.</li>
+        </ul>
+        <div class="tip"><b>Old style code</b>Older books and compilers use <code>#include &lt;iostream.h&gt;</code> and
+            <code>void main()</code>. Modern C++ uses <code>#include &lt;iostream&gt;</code>,
+            <code>using namespace std;</code> and <code>int main()</code>. If a handout shows the old style, write the
+            modern one.</div>
+        <h3>Statements and blocks</h3>
+        <ul>
+            <li><b>Statement:</b> the smallest independent unit, like a sentence in English. It ends with
+                <code>;</code>. (A period is not used because it would clash with the decimal point.)</li>
+            <li><b>Block (compound statement):</b> statements grouped inside <code>{ }</code> and treated as one unit.
+                No semicolon is needed after the closing brace.</li>
+        </ul>
+        <pre>product = number1 * number2 * number3;   // a statement
+
+if (mark &gt;= 50) {                        // a block
+    cout &lt;&lt; "PASS" &lt;&lt; endl;
+    cout &lt;&lt; "Well Done!" &lt;&lt; endl;
+}</pre>
+        <h3>Kinds of statements</h3>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Kind</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td>Preprocessor</td>
+                    <td>#include, #define: processed before compilation</td>
+                </tr>
+                <tr>
+                    <td>Declarative</td>
+                    <td>Declare or initialize a variable, define a constant</td>
+                </tr>
+                <tr>
+                    <td>Executable</td>
+                    <td>Input/output, assignment, expressions, selection (decisions), loops</td>
+                </tr>
+                <tr>
+                    <td>Special</td>
+                    <td>break, continue, return, exit</td>
+                </tr>
+            </table>
+        </div>
+        <h2 id="compile">3. How a Program is Compiled and Run?</h2>
+        <p>The computer understands only machine language, so your source code must be translated. A C++ program passes
+            through <b>six phases</b>:</p>
+        <div class="flow"><span>1 Edit</span><i>→</i><span>2 Preprocess</span><i>→</i><span>3
+                Compile</span><i>→</i><span>4 Link</span><i>→</i><span>5 Load</span><i>→</i><span>6 Execute</span></div>
+        <ol class="steps">
+            <li><b>Edit</b>
+                <ul>
+                    <li>Type your source code in an editor or IDE and save it as a <code>.cpp</code> file on disk.</li>
+                </ul>
+            </li>
+            <li><b>Preprocess</b>
+                <ul>
+                    <li>The preprocessor runs automatically before the compiler and carries out directives such as
+                        <code>#include</code>.</li>
+                    <li>The result is modified program text with no directives left.</li>
+                </ul>
+            </li>
+            <li><b>Compile</b>
+                <ul>
+                    <li>The compiler translates the program into machine code, called <b>object code</b>.</li>
+                    <li>The object code has “holes” where it uses library functions (for example, the code behind
+                        <code>&lt;&lt;</code>) that are defined elsewhere.</li>
+                </ul>
+            </li>
+            <li><b>Link</b>
+                <ul>
+                    <li>The linker fills the holes by combining your object code with the library code.</li>
+                    <li>The result is an <b>executable file</b> (for example .exe).</li>
+                </ul>
+            </li>
+            <li><b>Load</b>
+                <ul>
+                    <li>The loader copies the executable from disk into memory, together with any shared libraries it
+                        needs.</li>
+                </ul>
+            </li>
+            <li><b>Execute</b>
+                <ul>
+                    <li>The CPU runs the program one instruction at a time.</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="tip"><b>In plain words</b>Think of translating and publishing a book. The editor is you writing the
+            manuscript. The preprocessor pastes in the pages you referred to. The compiler translates it. The linker
+            binds it together with the reference books it mentions. The loader puts the finished book on the reading
+            desk (memory), and the CPU reads it aloud.</div>
+        <ul>
+            <li>The preprocessor, compiler, linker and loader are themselves ordinary programs.</li>
+            <li>Phases 2 to 4 together are the <b>build</b>; phases 5 and 6 are the <b>run</b>.</li>
+            <li><b>Compiler vs interpreter:</b> a compiler translates the whole program first and produces an
+                executable; an interpreter translates and runs it line by line. C++ is normally compiled.</li>
+        </ul>
+        <h2 id="pre">4. Preprocessor Directives, Libraries and Namespaces</h2>
+        <h3>Preprocessor directives</h3>
+        <ul>
+            <li>A directive starts with <code>#</code> and is handled <b>before</b> compilation.</li>
+            <li>Directives are not statements, so they do <b>not</b> end with a semicolon.</li>
+        </ul>
+        <pre>#include &lt;iostream&gt;   // include the input/output library
+#include &lt;cmath&gt;      // include the math library
+#define PI 3.14159265 // replace the word PI with 3.14159265</pre>
+        <ul>
+            <li><code>#include &lt;file&gt;</code> looks in the compiler’s standard folders.</li>
+            <li><code>#include "file.h"</code> (quotes) looks first in your own project folder, so it is used for your
+                own header files.</li>
+        </ul>
+        <h3>Library functions</h3>
+        <p>Library (built-in) functions are ready-made code you can use directly. You include the header that declares
+            them.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Header</th>
+                    <th>What it gives you</th>
+                </tr>
+                <tr>
+                    <td>iostream</td>
+                    <td>cin, cout: input and output</td>
+                </tr>
+                <tr>
+                    <td>cmath (math.h)</td>
+                    <td>sqrt(), sin(), cos(), pow(), log()</td>
+                </tr>
+                <tr>
+                    <td>cstdlib (stdlib.h)</td>
+                    <td>Conversions and general utilities</td>
+                </tr>
+                <tr>
+                    <td>cstring (string.h)</td>
+                    <td>String functions: strcpy(), strcat(), strcmp()</td>
+                </tr>
+                <tr>
+                    <td>cctype (ctype.h)</td>
+                    <td>Character tests: isalpha(), isdigit(), toupper(), tolower()</td>
+                </tr>
+                <tr>
+                    <td>ctime (time.h)</td>
+                    <td>Date and time functions</td>
+                </tr>
+                <tr>
+                    <td>climits</td>
+                    <td>Limits of integer types: INT_MAX, INT_MIN, CHAR_MAX</td>
+                </tr>
+                <tr>
+                    <td>cfloat</td>
+                    <td>Limits of floating-point types</td>
+                </tr>
+                <tr>
+                    <td>iomanip</td>
+                    <td>Output formatting: setw(), setprecision(), setfill()</td>
+                </tr>
+            </table>
+        </div>
+        <h3>Namespaces</h3>
+        <ul>
+            <li>A <b>namespace</b> is a named group of names. It prevents clashes when two libraries use the same name.
+            </li>
+            <li>cout and endl belong to the namespace <code>std</code>. You can write the full name
+                <code>std::cout</code>, or write <code>using namespace std;</code> once and then just <code>cout</code>.
+            </li>
+            <li>You can also pull in one name only: <code>using std::cout;</code></li>
+        </ul>
+        <div class="tip"><b>In plain words</b>Imagine two students named Abebe in the same class. You say “Abebe from
+            Group A” to tell them apart. The group name is the namespace, and <code>std::cout</code> means “cout from
+            the std group”.</div>
+        <h2 id="io">5. Input and Output Streams</h2>
+        <ul>
+            <li>C++ moves data in <b>streams</b>: sequences of bytes flowing between your program and a device.</li>
+            <li><b>Input stream:</b> data flows from a device (such as the keyboard) into memory. <b>Output stream:</b>
+                data flows from memory to a device (such as the screen).</li>
+            <li>Both are in the <code>iostream</code> library, so include it first.</li>
+        </ul>
+        <div class="grid">
+            <div class="card">
+                <h3>cout: output</h3>
+                <ul>
+                    <li>Pronounced “C out”, connected to the screen.</li>
+                    <li><code>cout &lt;&lt; data;</code></li>
+                    <li><code>&lt;&lt;</code> is the <b>insertion</b> operator (“put to”).</li>
+                    <li>Data can be a string in quotes, a variable, or a value.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>cin: input</h3>
+                <ul>
+                    <li>Pronounced “C in”, connected to the keyboard.</li>
+                    <li><code>cin &gt;&gt; variable;</code></li>
+                    <li><code>&gt;&gt;</code> is the <b>extraction</b> operator (“get from”).</li>
+                    <li>Needs a variable to hold the value.</li>
+                </ul>
+            </div>
+        </div>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cout &lt;&lt; "Enter values of a and b: ";
+    cin &gt;&gt; a &gt;&gt; b;            // user types: 10 20
+    c = a + b;
+    cout &lt;&lt; "The result is: " &lt;&lt; c &lt;&lt; endl;
+    return 0;
+}</pre>
+        <ul>
+            <li>The program waits for you to type two numbers separated by a space, tab or new line. Typing 10 and 20
+                stores 10 in <code>a</code> and 20 in <code>b</code>.</li>
+            <li>Operators can be <b>chained</b>: <code>cout &lt;&lt; a &lt;&lt; ", " &lt;&lt; b;</code> prints both
+                values with a comma between them.</li>
+            <li><code>endl</code> ends the line (like pressing Enter). <code>"\n"</code> does the same.</li>
+            <li>The compiler chooses the right way to read or print each value from its type.</li>
+        </ul>
+        <div class="tip"><b>In plain words</b>Output is the program speaking to you; input is you speaking to the
+            program. The arrows show the direction: <code>cout &lt;&lt;</code> points toward the screen,
+            <code>cin &gt;&gt;</code> points toward the variable.</div>
+        <h2 id="vars">6. Variables and Data Types</h2>
+        <p>A <b>variable</b> is a named storage location in memory that holds a value of one particular type. It has
+            three parts: a <b>name</b>, a <b>type</b> and a <b>value</b>.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>number</td>
+                    <td>123</td>
+                    <td>int</td>
+                </tr>
+                <tr>
+                    <td>sum</td>
+                    <td>-456</td>
+                    <td>int</td>
+                </tr>
+                <tr>
+                    <td>pi</td>
+                    <td>3.1416</td>
+                    <td>double</td>
+                </tr>
+                <tr>
+                    <td>average</td>
+                    <td>-55.66</td>
+                    <td>double</td>
+                </tr>
+            </table>
+        </div>
+        <div class="tip"><b>In plain words</b>A variable is a labeled box. The label is the <b>name</b>, the kind of
+            thing the box can hold is the <b>type</b> (a box for whole numbers, a box for decimals), and what is inside
+            right now is the <b>value</b>. You can swap the contents, but you cannot put a decimal number into a
+            whole-number box without it being cut short.</div>
+        <h3>Fundamental data types</h3>
+        <ul>
+            <li><b>Integer</b> (whole numbers): <code>char, short, int, long, long long</code>, each signed or unsigned.
+            </li>
+            <li><b>Floating-point</b> (numbers with a decimal point): <code>float, double, long double</code>.</li>
+            <li><b>Character:</b> <code>char</code> holds one character in single quotes, such as <code>'A'</code>. It
+                is stored as its ASCII number ('A' is 65, 'a' is 97, '0' is 48).</li>
+            <li><b>Boolean:</b> <code>bool</code> holds <code>true</code> or <code>false</code>.</li>
+        </ul>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Size (typical)</th>
+                    <th>Range (typical)</th>
+                </tr>
+                <tr>
+                    <td>char</td>
+                    <td>1 byte</td>
+                    <td>-128 to 127</td>
+                </tr>
+                <tr>
+                    <td>unsigned char</td>
+                    <td>1 byte</td>
+                    <td>0 to 255</td>
+                </tr>
+                <tr>
+                    <td>short</td>
+                    <td>2 bytes</td>
+                    <td>-32,768 to 32,767</td>
+                </tr>
+                <tr>
+                    <td>unsigned short</td>
+                    <td>2 bytes</td>
+                    <td>0 to 65,535</td>
+                </tr>
+                <tr>
+                    <td>int</td>
+                    <td>4 bytes (2 on old 16-bit compilers)</td>
+                    <td>-2,147,483,648 to 2,147,483,647</td>
+                </tr>
+                <tr>
+                    <td>unsigned int</td>
+                    <td>4 bytes</td>
+                    <td>0 to 4,294,967,295</td>
+                </tr>
+                <tr>
+                    <td>long long</td>
+                    <td>8 bytes</td>
+                    <td>about ±9.2 × 10^18</td>
+                </tr>
+                <tr>
+                    <td>float</td>
+                    <td>4 bytes</td>
+                    <td>about ±3.4 × 10^38</td>
+                </tr>
+                <tr>
+                    <td>double</td>
+                    <td>8 bytes</td>
+                    <td>about ±1.7 × 10^308</td>
+                </tr>
+                <tr>
+                    <td>bool</td>
+                    <td>1 byte</td>
+                    <td>true or false</td>
+                </tr>
+            </table>
+        </div>
+        <p style="color:var(--mu)">Sizes depend on the compiler and computer. Old 16-bit compilers such as Turbo C++ use
+            2-byte ints, so the handout table shows smaller ranges. Use <code>sizeof</code> to check your own system.
+        </p>
+        <pre>cout &lt;&lt; "sizeof(char) is " &lt;&lt; sizeof(char) &lt;&lt; " bytes" &lt;&lt; endl;
+cout &lt;&lt; "sizeof(int)  is " &lt;&lt; sizeof(int)  &lt;&lt; " bytes" &lt;&lt; endl;
+cout &lt;&lt; "sizeof(double) is " &lt;&lt; sizeof(double) &lt;&lt; " bytes" &lt;&lt; endl;</pre>
+        <h3>Signed and unsigned</h3>
+        <ul>
+            <li><b>Signed</b> types hold negative, zero and positive values. <b>Unsigned</b> types hold zero and
+                positive values only.</li>
+            <li>Both use the same number of bits, so an unsigned type can hold a maximum about <b>twice as large</b>.
+            </li>
+            <li><b>Example with only 4 bits:</b> unsigned holds 0 to 15. Signed uses the first bit for the sign, leaving
+                3 bits, so it holds -8 to 7.</li>
+        </ul>
+        <h3>Wrapping around (overflow)</h3>
+        <ul>
+            <li>If a value goes past the maximum, it does not stop. It <b>wraps around</b>.</li>
+            <li>Unsigned short: <code>65535 + 1</code> becomes <code>0</code>.</li>
+            <li>Signed short: <code>32767 + 1</code> becomes <code>-32768</code>.</li>
+            <li>C++ gives <b>no warning</b>. Checking for overflow is your job.</li>
+        </ul>
+        <pre>int i1 = 2147483647;   // largest int
+cout &lt;&lt; i1 + 1 &lt;&lt; endl; // -2147483648  (overflow)</pre>
+        <div class="tip"><b>In plain words</b>Think of a car odometer with 5 digits. After 99999 it rolls over to 00000.
+            An unsigned short does the same at 65535. It is not an error message, just the counter running out of room.
+        </div>
+        <h3>Declaring and initializing variables</h3>
+        <ul>
+            <li>A variable must be <b>declared</b> before use: <code>DataType name;</code></li>
+            <li>Each variable can be declared only once.</li>
+            <li>C++ is <b>strongly typed</b>: once declared, an <code>int</code> can only hold integers, never text.
+            </li>
+            <li><b>Initialization</b> gives a value at the moment of declaration: <code>DataType name = value;</code>
+            </li>
+        </ul>
+        <pre>int myAge;                    // declaration
+int num1, num2, num3;         // several of one type
+double width = 26.3, area = 0.0;  // declaration + initialization
+int length(12), height(5);    // another way to initialize</pre>
+        <div class="tip"><b>Careful: garbage values</b>A declared but uninitialized variable contains <b>garbage</b>
+            (whatever was in that memory). C++ does not warn you. For example, printing an uninitialized
+            <code>int number;</code> gives an unpredictable value. Always give variables a starting value.</div>
+        <h3>Naming variables (identifiers)</h3>
+        <div class="grid">
+            <div class="card">
+                <h3>Rules</h3>
+                <ul>
+                    <li>Use letters (a-z, A-Z), digits (0-9) and underscore only.</li>
+                    <li>Start with a letter or underscore, never a digit.</li>
+                    <li>No spaces or special characters (+ - * / @ $ . ,).</li>
+                    <li>Cannot be a keyword such as <code>int</code>, <code>if</code>, <code>return</code>.</li>
+                    <li><b>Case-sensitive:</b> <code>Age</code> and <code>age</code> are different.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Good practice</h3>
+                <ul>
+                    <li>Choose meaningful names: <code>numStudents</code>, not <code>a</code>.</li>
+                    <li>camelCase: first word lowercase, later words capitalized: <code>roomNumber</code>,
+                        <code>xMax</code>.</li>
+                    <li>Single letters only for common uses: x, y, z, and i as an index.</li>
+                    <li>Use singular and plural: <code>row</code> and <code>rows</code>.</li>
+                </ul>
+            </div>
+        </div>
+        <details>
+            <summary>Reserved keywords (some)</summary>
+            <p>These words have a special meaning and cannot be used as names. All are lowercase.</p>
+            <p><code>asm auto break case catch char class const continue default delete do double else enum extern float for friend goto if inline int long new operator private protected public register return short signed sizeof static struct switch template this throw try typedef union unsigned virtual void volatile while</code>
+            </p>
+        </details>
+        <h3>Memory: where variables live</h3>
+        <ul>
+            <li>RAM is a long sequence of <b>bits</b> (0 or 1), grouped in 8s called <b>bytes</b>.</li>
+            <li>Each byte has a numbered <b>address</b>, like a house number on a street.</li>
+            <li>Declaring a variable reserves enough bytes for its type and gives that place a name.</li>
+        </ul>
+        <h3>Scope of variables</h3>
+        <p>The <b>scope</b> of a variable is the part of the program where it can be used. It starts at the declaration
+            and ends at the closing brace of the block that contains it.</p>
+        <ul>
+            <li><b>Global variable:</b> declared outside every function. It can be used anywhere after its declaration.
+            </li>
+            <li><b>Local variable:</b> declared inside a function or block. It exists only there and disappears when the
+                block ends.</li>
+        </ul>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int age = 34;            // global
+
+int main() {
+    int age = 14;        // local, hides the global
+    cout &lt;&lt; age &lt;&lt; endl;     // 14
+    cout &lt;&lt; ::age &lt;&lt; endl;   // 34  (:: reaches the global)
+    return 0;
+}</pre>
+        <div class="tip"><b>In plain words</b>A global variable is a notice on the school notice board: everyone can
+            read it. A local variable is a note inside one classroom: only the people in that room can see it, and it is
+            thrown away when the class ends.</div>
+        <h3>typedef: your own type name</h3>
+        <p><code>typedef</code> gives a shorter alias to a long type name.</p>
+        <pre>typedef unsigned short int USHORT;
+USHORT width = 9;     // same as: unsigned short int width = 9;</pre>
+        <h2 id="consts">7. Constants and Literals</h2>
+        <p>A <b>constant</b> is like a variable whose value <b>never changes</b> after it is set. It must be given its
+            value when created, and you cannot assign to it later.</p>
+        <pre>const int N = 22;
+const double PI = 3.14159;
+// N = 30;   // ERROR: cannot change a constant</pre>
+        <ul>
+            <li>Use constants for values used often but never changed, such as a tax rate.</li>
+            <li>Convention: write constant names in CAPITALS with underscores: <code>MAX_SIZE</code>.</li>
+        </ul>
+        <div class="tip"><b>In plain words</b>A variable is like a whiteboard that you can rewrite. A constant is like
+            the price printed on a ticket: it is fixed, so nobody can change it by accident.</div>
+        <h3>Two ways to make a symbolic constant</h3>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Way</th>
+                    <th>Example</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>const keyword</td>
+                    <td>const unsigned short int STUDENTS = 15;</td>
+                    <td>Has a type, so the compiler checks how it is used. Preferred.</td>
+                </tr>
+                <tr>
+                    <td>#define directive</td>
+                    <td>#define STUDENTS 15</td>
+                    <td>Plain text replacement by the preprocessor. No type, and no semicolon.</td>
+                </tr>
+            </table>
+        </div>
+        <h3>Literals</h3>
+        <p>A <b>literal</b> is a fixed value typed directly in the code, such as <code>43</code> in
+            <code>int num = 43;</code>.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Kind</th>
+                    <th>Examples</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Integer</td>
+                    <td>123 -456 0x1abc 01234</td>
+                    <td>Default type int. 0x prefix = hexadecimal, 0 prefix = octal. Suffix L = long, LL = long long, U
+                        = unsigned. No commas or $ signs.</td>
+                </tr>
+                <tr>
+                    <td>Floating-point</td>
+                    <td>55.66 -1.2e3 3.88f</td>
+                    <td>Default type double. Suffix f for float, L for long double.</td>
+                </tr>
+                <tr>
+                    <td>Character</td>
+                    <td>'a' 'Z' '9'</td>
+                    <td>One character in single quotes; stored as an ASCII number.</td>
+                </tr>
+                <tr>
+                    <td>String</td>
+                    <td>"Hello, world!"</td>
+                    <td>Zero or more characters in double quotes.</td>
+                </tr>
+                <tr>
+                    <td>Boolean</td>
+                    <td>true false</td>
+                    <td>Converted to 1 and 0 in expressions.</td>
+                </tr>
+            </table>
+        </div>
+        <h3>Escape sequences</h3>
+        <p>Special characters are written with a backslash.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Sequence</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>\n</td>
+                    <td>new line</td>
+                </tr>
+                <tr>
+                    <td>\t</td>
+                    <td>tab</td>
+                </tr>
+                <tr>
+                    <td>\b</td>
+                    <td>backspace</td>
+                </tr>
+                <tr>
+                    <td>\"</td>
+                    <td>double quote</td>
+                </tr>
+                <tr>
+                    <td>\'</td>
+                    <td>single quote</td>
+                </tr>
+                <tr>
+                    <td>\\</td>
+                    <td>backslash</td>
+                </tr>
+                <tr>
+                    <td>\?</td>
+                    <td>question mark</td>
+                </tr>
+            </table>
+        </div>
+        <pre>cout &lt;&lt; "She said \"Hello\"\n";     // She said "Hello"
+cout &lt;&lt; "Name:\tAbebe" &lt;&lt; endl;      // tab between the words</pre>
+        <h3>Enumerated constants (enum)</h3>
+        <ul>
+            <li><code>enum</code> creates a group of named integer constants.</li>
+            <li>By default the first is 0 and each next one is 1 more. You can set your own values; the following ones
+                continue counting from there.</li>
+        </ul>
+        <pre>enum Color { RED, BLUE, GREEN, WHITE, BLACK };
+// RED=0, BLUE=1, GREEN=2, WHITE=3, BLACK=4
+
+enum Color2 { RED2 = 100, BLUE2, GREEN2 = 500, WHITE2, BLACK2 };
+// 100, 101, 500, 501, 502</pre>
+        <div class="tip"><b>In plain words</b>An enum is a way to give names to numbers so code reads clearly. Writing
+            <code>SUMMER</code> is easier to understand than the number 1.</div>
+        <h2 id="ops">8. Operators and Expressions</h2>
+        <ul>
+            <li>An <b>operator</b> is a symbol that tells the computer to perform a mathematical or logical action.</li>
+            <li>The values it works on are <b>operands</b>. Operators can be <b>unary</b> (one operand), <b>binary</b>
+                (two) or <b>ternary</b> (three).</li>
+            <li>An <b>expression</b> combines operators and operands and evaluates to a single value. For example,
+                <code>3 + 2</code> evaluates to 5.</li>
+        </ul>
+        <h3>Arithmetic operators</h3>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Meaning</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>+ - *</td>
+                    <td>add, subtract, multiply</td>
+                    <td>2 + 3 gives 5</td>
+                </tr>
+                <tr>
+                    <td>/</td>
+                    <td>divide</td>
+                    <td>9 / 2.0 gives 4.5</td>
+                </tr>
+                <tr>
+                    <td>%</td>
+                    <td>remainder (integers only)</td>
+                    <td>11 % 3 gives 2</td>
+                </tr>
+            </table>
+        </div>
+        <ul>
+            <li><b>Integer division:</b> if both operands are integers, the result is an integer and the fraction is
+                dropped (not rounded). <code>9 / 2</code> gives <b>4</b>, and <code>-9 / 2</code> gives <b>-4</b>.</li>
+            <li>If either operand is real, the result is real: <code>9 / 2.0</code> gives 4.5.</li>
+            <li><b>Mixed types:</b> the smaller type is promoted to the larger one (implicit casting), so
+                <code>1 / 2.0</code> gives 0.5 but <code>1 / 2</code> gives 0.</li>
+            <li>Write the multiplication sign: use <code>2 * a</code>, not <code>2a</code>.</li>
+        </ul>
+        <div class="tip"><b>In plain words</b>Share 9 mangoes between 2 people. With whole mangoes only (integer
+            division) each gets 4, and the leftover 1 is the remainder (<code>%</code>). If you cut the last mango in
+            half (real division), each gets 4.5.</div>
+        <pre>// Math: (1 + 2a)/3 + 4(b+c)(5-d-e)/f - 6(7/g + h)
+// C++:
+(1 + 2*a)/3 + (4*(b + c)*(5 - d - e))/f - 6*(7/g + h)</pre>
+        <h3>Assignment operators</h3>
+        <ul>
+            <li><code>=</code> means “evaluate the right side and store it in the variable on the left”. It is
+                <b>not</b> mathematical equality.</li>
+            <li><code>x = x + 1</code> is valid and common: take x, add 1, store it back in x.</li>
+            <li><b>Multiple assignment:</b> <code>a = b = c = 36;</code></li>
+        </ul>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Same as</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>+=</td>
+                    <td>x = x + 5</td>
+                    <td>x += 5</td>
+                </tr>
+                <tr>
+                    <td>-=</td>
+                    <td>x = x - 5</td>
+                    <td>x -= 5</td>
+                </tr>
+                <tr>
+                    <td>*=</td>
+                    <td>x = x * 5</td>
+                    <td>x *= 5</td>
+                </tr>
+                <tr>
+                    <td>/=</td>
+                    <td>x = x / 5</td>
+                    <td>x /= 5</td>
+                </tr>
+                <tr>
+                    <td>%=</td>
+                    <td>x = x % 5</td>
+                    <td>x %= 5</td>
+                </tr>
+            </table>
+        </div>
+        <h3>Relational (comparison) operators</h3>
+        <p>They compare two values and give <code>true</code> (1) or <code>false</code> (0).</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Meaning</th>
+                    <th>x = 5, y = 8</th>
+                </tr>
+                <tr>
+                    <td>==</td>
+                    <td>equal to</td>
+                    <td>x == y is false</td>
+                </tr>
+                <tr>
+                    <td>!=</td>
+                    <td>not equal</td>
+                    <td>x != y is true</td>
+                </tr>
+                <tr>
+                    <td>&gt; &gt;=</td>
+                    <td>greater than; or equal</td>
+                    <td>x &gt;= 5 is true</td>
+                </tr>
+                <tr>
+                    <td>&lt; &lt;=</td>
+                    <td>less than; or equal</td>
+                    <td>y &lt; 8 is false</td>
+                </tr>
+            </table>
+        </div>
+        <div class="tip"><b>Common beginner mistake</b><code>=</code> assigns, <code>==</code> compares. Writing
+            <code>if (x = 5)</code> instead of <code>if (x == 5)</code> compiles but does the wrong thing.</div>
+        <h3>Logical operators</h3>
+        <ul>
+            <li><code>&amp;&amp;</code> AND: true only if both sides are true.</li>
+            <li><code>||</code> OR: true if at least one side is true.</li>
+            <li><code>!</code> NOT: reverses true and false.</li>
+            <li>Any non-zero value counts as true; only 0 is false.</li>
+        </ul>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>A &amp;&amp; B</th>
+                    <th>A || B</th>
+                    <th>!A</th>
+                </tr>
+                <tr>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td>false</td>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>true</td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>true</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>true</td>
+                    <td>true</td>
+                    <td>true</td>
+                    <td>true</td>
+                    <td>false</td>
+                </tr>
+            </table>
+        </div>
+        <pre>(x &gt;= 0) &amp;&amp; (x &lt;= 100)     // x is between 0 and 100 (do NOT write 0 &lt;= x &lt;= 100)
+(x &lt; 0) || (x &gt; 100)       // x is outside 0..100
+
+// leap year: divisible by 4 but not by 100, or divisible by 400
+((year % 4 == 0) &amp;&amp; (year % 100 != 0)) || (year % 400 == 0)</pre>
+        <h3>Increment and decrement</h3>
+        <ul>
+            <li><code>++</code> adds 1 and <code>--</code> subtracts 1. <code>a++</code>, <code>++a</code> and
+                <code>a += 1</code> all do the same to <code>a</code>.</li>
+            <li><b>Prefix</b> (<code>++a</code>): change first, then use the value.</li>
+            <li><b>Postfix</b> (<code>a++</code>): use the value first, then change.</li>
+            <li>The difference shows up only when the result is used in the same statement.</li>
+        </ul>
+        <pre>int a = 5, b;
+b = ++a;     // a becomes 6 first, then b = 6    (a = 6, b = 6)
+
+a = 5;
+b = a++;     // b = 5 first, then a becomes 6    (a = 6, b = 5)</pre>
+        <div class="tip"><b>In plain words</b>Prefix is “add the coin, then count”. Postfix is “count the coin, then add
+            it”.</div>
+        <h3>Conditional (ternary) operator</h3>
+        <p>A short form of a two-way choice: <code>condition ? valueIfTrue : valueIfFalse</code></p>
+        <pre>int a = 10, b = 15;
+int x = (a &gt; b) ? a : b;     // x = 15  (the larger one)
+int min = (m &lt; n) ? m : n;   // the smaller of m and n</pre>
+        <h3>Other operators</h3>
+        <div class="grid">
+            <div class="card">
+                <h3>Bitwise</h3>
+                <p>Work on individual bits. With a = 8 (1000) and b = 3 (0011):</p>
+                <ul>
+                    <li><code>a &amp; b</code> = 0000 = 0</li>
+                    <li><code>a | b</code> = 1011 = 11</li>
+                    <li><code>a ^ b</code> = 1011 = 11 (XOR)</li>
+                    <li><code>~a</code> flips every bit</li>
+                    <li><code>a &lt;&lt; 2</code> = 32 (times 2² )</li>
+                    <li><code>a &gt;&gt; 2</code> = 2 (divided by 2²)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>sizeof</h3>
+                <ul>
+                    <li>Returns the size of a type or variable in bytes.</li>
+                    <li><code>sizeof(int)</code>; the result depends on the machine.</li>
+                </ul>
+                <h3>Comma</h3>
+                <ul>
+                    <li>Evaluates left, then right, and returns the right value.</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Type casting</h3>
+        <ul>
+            <li><b>Implicit:</b> the compiler converts automatically. Assigning an int to a double is safe (3 becomes
+                3.0). Assigning a double to an int <b>drops the fraction</b> (5.5 becomes 5), usually with no warning.
+            </li>
+            <li><b>Explicit:</b> you ask for the conversion: <code>(double)x</code> or <code>double(x)</code>. C++ also
+                has <code>static_cast&lt;double&gt;(x)</code>, which is safer.</li>
+        </ul>
+        <pre>int sum = 5050;
+double average;
+average = sum / 100;            // 50.0  WRONG: integer division first
+average = (double)sum / 100;    // 50.5  correct
+average = sum / 100.0;          // 50.5  correct
+average = (double)(sum / 100);  // 50.0  WRONG: the cast comes too late</pre>
+        <div class="tip"><b>Why the last one fails</b>Brackets run first. <code>sum / 100</code> is done as integer
+            division (50), and only then converted to 50.0. The cast must be applied to an operand <b>before</b> the
+            division.</div>
+        <h3>Operator precedence</h3>
+        <p>Precedence decides which operator is evaluated first. Higher in the table goes first. Brackets
+            <code>( )</code> override everything.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Level</th>
+                    <th>Operators</th>
+                    <th>Order</th>
+                </tr>
+                <tr>
+                    <td>Highest</td>
+                    <td>++ -- (postfix), sizeof, ++ -- (prefix)</td>
+                    <td>Right to left</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>* / %</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>+ -</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&lt; &lt;= &gt; &gt;=</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>== !=</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&amp;&amp;</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>||</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>? :</td>
+                    <td>Left to right</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>= += -= *= /= %= ...</td>
+                    <td>Right to left</td>
+                </tr>
+                <tr>
+                    <td>Lowest</td>
+                    <td>,</td>
+                    <td>Left to right</td>
+                </tr>
+            </table>
+        </div>
+        <pre>a == b + c * d      // evaluated as  a == (b + (c * d))
+a == (b + c) * d    // brackets force + first</pre>
+        <div class="tip"><b>In plain words</b>Precedence is the “who goes first” rule, just like multiplication before
+            addition in school maths. When in doubt, add brackets. They make the code clearer and cost nothing.</div>
+        <h2 id="style">9. Program Formatting and Good Code Style</h2>
+        <h3>Comments</h3>
+        <ul>
+            <li>A comment is text for human readers. The compiler ignores it.</li>
+            <li><code>// ...</code> single-line comment: to the end of the line.</li>
+            <li><code>/* ... */</code> multi-line comment: everything between the symbols.</li>
+            <li>Use comments to state the program’s purpose, explain variables and describe tricky logic. You can also
+                “comment out” code to disable it temporarily.</li>
+            <li>Good comments are shorter and clearer than the code. Too many comments hurt readability, so use
+                meaningful names to reduce the need for them.</li>
+        </ul>
+        <pre>c = 5.0/9*(f - 32);   // convert Fahrenheit to Celsius
+
+/* Area of a circle:
+   multi-line comment */</pre>
+        <h3>Formatting source code</h3>
+        <ul>
+            <li>C++ ignores extra spaces, tabs and blank lines. They are <b>white space</b>. You must still separate
+                words: <code>int sum</code>, not <code>intsum</code>.</li>
+            <li>Good layout does not change how the program runs, but it makes it far easier to read, for others and for
+                you three days later.</li>
+            <li><b>Braces:</b> put the opening brace at the end of the line; align the closing brace with the start of
+                the statement.</li>
+            <li><b>Indentation:</b> indent the body of each block by 3 or 4 spaces per level.</li>
+            <li>Use blank lines to separate sections of code.</li>
+        </ul>
+        <div class="grid">
+            <pre>#include &lt;iostream&gt;
+using namespace std;int main(){cout&lt;&lt;"Hello, world!"&lt;&lt;endl;return 0;}</pre>
+            <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int mark = 70;
+    if (mark &gt;= 50) {
+        cout &lt;&lt; "You Pass!" &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "You Fail!" &lt;&lt; endl;
+    }
+    return 0;
+}</pre>
+        </div>
+        <p style="color:var(--mu)">Both work, but only the second is readable. Most IDEs can re-format your code
+            automatically.</p>
+        <div class="tip"><b>Writing good programs</b>
+            <ul>
+                <li>Follow conventions so everyone reads code the same way.</li>
+                <li>Use consistent indentation and blank lines.</li>
+                <li>Choose self-descriptive names.</li>
+                <li>Comment important ideas, and write documentation as you code.</li>
+                <li>Avoid hard-to-follow jumps such as <code>break</code> and <code>continue</code> where possible.</li>
+                <li>Use a mono-space font (Consolas, Courier New) in your editor.</li>
+            </ul>
+        </div>
+        <h2 id="errors">10. Programming Errors and Debugging</h2>
+        <p>Errors (bugs) can be found before compiling (by <b>desk checking</b>: reading your own code carefully), while
+            compiling, while running, or after seeing wrong output. There are three kinds.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Syntax (compile-time) error</h3>
+                <ul>
+                    <li>You broke a grammar rule. The compiler finds it and refuses to build.</li>
+                    <li>Missing semicolon, misspelled name, undeclared variable, unmatched braces or brackets.</li>
+                    <li>Easy to fix: read the message and the line number.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Runtime error</h3>
+                <ul>
+                    <li>The program compiles but fails while running.</li>
+                    <li>Dividing by zero, opening a file that does not exist.</li>
+                    <li>The program stops early; the compiler cannot warn you.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Logical error</h3>
+                <ul>
+                    <li>The program runs but gives wrong results. The compiler cannot see it.</li>
+                    <li>Wrong formula, missing output statement, uninitialized variable, wrong order of statements.</li>
+                    <li>The hardest kind to find. Often caused by misunderstanding the requirements.</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Spot the errors</h3>
+        <pre>cout &lt;&lt; "There are four syntax errors here\n
+cot " Can you find tem";</pre>
+        <details>
+            <summary>Show the four errors</summary>
+            <ol>
+                <li>The closing quotation mark is missing in line 1.</li>
+                <li>The semicolon is missing at the end of line 1.</li>
+                <li><code>cout</code> is misspelled as <code>cot</code> in line 2.</li>
+                <li>The insertion operator <code>&lt;&lt;</code> is missing in line 2.</li>
+            </ol>
+        </details>
+        <h3>Debugging Techniques</h3>
+        <ol>
+            <li><b>Read the error messages.</b> Do not ignore them; they usually say the line and the cause.</li>
+            <li><b>Insert print statements</b> to show intermediate values. Works for small programs.</li>
+            <li><b>Use a debugger.</b> The most effective tool: run step by step and watch variables change.</li>
+            <li><b>Test with representative cases</b> (typical, boundary and wrong inputs) to expose logic errors.</li>
+            <li>Advanced tools such as a <b>profiler</b> help find memory leaks and slow functions.</li>
+        </ol>
+        <div class="tip"><b>In plain words</b>A syntax error is a spelling mistake: the spell-checker catches it. A
+            logical error is a perfectly spelled sentence that says the wrong thing: nobody catches it unless you test
+            it.</div>
+        <h2 id="fmt">11. Formatted Input and Output</h2>
+        <p>Include <code>&lt;iomanip&gt;</code> to control how output looks.</p>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>What it does</th>
+                </tr>
+                <tr>
+                    <td>setw(n) / width(n)</td>
+                    <td>Sets the width of the <b>next</b> value only</td>
+                </tr>
+                <tr>
+                    <td>setfill(ch) / fill(ch)</td>
+                    <td>Fills unused space with a character</td>
+                </tr>
+                <tr>
+                    <td>setprecision(n) / precision(n)</td>
+                    <td>Number of digits to print (after the point when used with fixed)</td>
+                </tr>
+                <tr>
+                    <td>fixed</td>
+                    <td>Prints decimals in fixed notation</td>
+                </tr>
+                <tr>
+                    <td>setf(...)</td>
+                    <td>Sets display format flags</td>
+                </tr>
+                <tr>
+                    <td>peek(), ignore(n), putback(ch)</td>
+                    <td>Look at, skip, or return characters in the input stream</td>
+                </tr>
+            </table>
+        </div>
+        <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; setfill('*') &lt;&lt; setw(5) &lt;&lt; 'a' &lt;&lt; endl;     // ****a
+    cout &lt;&lt; setw(8) &lt;&lt; 42 &lt;&lt; endl;                      //       42
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.14159 &lt;&lt; endl; // 3.14
+    return 0;
+}</pre>
+        <p style="color:var(--mu)">Note: <code>setw</code> applies only to the next value printed. Set it again for each
+            value.</p>
+        <h2 id="worked">12. Worked Programs</h2>
+        <h3>Program 1: area of a circle from its diameter</h3>
+        <ul>
+            <li><b>Input:</b> diameter d. <b>Process:</b> r = d / 2, then area = π × r × r. <b>Output:</b> area.</li>
+        </ul>
+        <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    const double PI = 3.1415;
+    double d, r, area;
+    cout &lt;&lt; "Enter the diameter: ";
+    cin &gt;&gt; d;
+    r = d / 2;
+    area = PI * r * r;
+    cout &lt;&lt; "Area of the circle is " &lt;&lt; area &lt;&lt; endl;
+    return 0;
+}</pre>
+        <div class="tip"><b>A hidden logic error in the handout version</b>The handout declares <code>int d, r;</code>.
+            Then <code>r = d / 2</code> is integer division: a diameter of 5 gives r = 2 instead of 2.5, so the area is
+            wrong. Declaring <code>d</code> and <code>r</code> as <code>double</code> fixes it.</div>
+        <h3>Program 2: Celsius and Fahrenheit</h3>
+        <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    double celsius, fahrenheit;
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+
+    cout &lt;&lt; "Enter the temperature in Celsius: ";
+    cin &gt;&gt; celsius;
+    fahrenheit = celsius * 9 / 5 + 32;      // 9/5*celsius would use 9/5 = 1
+    cout &lt;&lt; celsius &lt;&lt; "C is " &lt;&lt; fahrenheit &lt;&lt; "F" &lt;&lt; endl;
+
+    cout &lt;&lt; "Enter the temperature in Fahrenheit: ";
+    cin &gt;&gt; fahrenheit;
+    celsius = (fahrenheit - 32) * 5 / 9;    // 5/9*(...) would use 5/9 = 0
+    cout &lt;&lt; fahrenheit &lt;&lt; "F is " &lt;&lt; celsius &lt;&lt; "C" &lt;&lt; endl;
+    return 0;
+}</pre>
+        <p style="color:var(--mu)">Why do <code>9/5*celsius</code> and <code>5/9*(...)</code> give wrong answers?
+            Because 9/5 and 5/9 are integer divisions (1 and 0). Write <code>5.0/9</code>, or multiply first.</p>
+        <h2 id="practice">13. Practice Exercises: Try it yourself</h2>
+        <p>Answer first. For <b>predict the output</b> questions, type what the program prints. For <b>write a
+                program</b> questions, type your code or steps. Then submit to see the model answer.</p>
+        <div id="ex"></div>
+        <h2 id="gloss">Glossary for beginners</h2>
+        <dl>
+            <dt>Source code</dt>
+            <dd>The text of a program that you write.</dd>
+            <dt>Object code</dt>
+            <dd>Machine code produced by the compiler, before linking.</dd>
+            <dt>Executable</dt>
+            <dd>The final runnable file produced by the linker.</dd>
+            <dt>Header file</dt>
+            <dd>A file of declarations (such as iostream) added with #include.</dd>
+            <dt>Stream</dt>
+            <dd>A flow of data between the program and a device.</dd>
+            <dt>Identifier</dt>
+            <dd>The name of a variable, function or other item.</dd>
+            <dt>Declaration</dt>
+            <dd>Telling the compiler a variable’s name and type.</dd>
+            <dt>Initialization</dt>
+            <dd>Giving a variable its first value.</dd>
+            <dt>Literal</dt>
+            <dd>A fixed value written directly in code, like 43 or "Hi".</dd>
+            <dt>Operand</dt>
+            <dd>A value an operator works on.</dd>
+            <dt>Expression</dt>
+            <dd>Operators and operands that evaluate to one value.</dd>
+            <dt>Overflow</dt>
+            <dd>A result too big for its type, so it wraps around.</dd>
+            <dt>Type casting</dt>
+            <dd>Converting a value from one type to another.</dd>
+            <dt>Scope</dt>
+            <dd>The part of a program where a name can be used.</dd>
+            <dt>Bug</dt>
+            <dd>An error in a program.</dd>
+        </dl>
+        <h2 id="check">Self-check quiz</h2>
+        <p>Pick an answer. You will see at once whether it is right, and why.</p>
+        <div class="qz">
+            <p class="msg" id="score"></p>
+            <div id="quiz"></div><button class="btn" id="rst">Start again</button>
+        </div>
+    </main>
+    <footer>Fundamentals of Programming I · Chapter 2</footer>
+    <script>(function () {
+            var EX = [{ "t": "1. Valid or invalid identifiers?", "p": "Say which are valid and which invalid, with a reason: Identifier, seven_11, _unique_, gross-income, gross$income, 2by2, Default, average_weight_of_large_pizza, variable, object.oriented", "s": "<ul><li>Valid: Identifier, seven_11, _unique_ (starts with an underscore), Default (capital D, so it is not the keyword default), average_weight_of_large_pizza, variable (not a keyword).</li><li>Invalid: gross-income (hyphen), gross$income (dollar sign), 2by2 (starts with a digit), object.oriented (dot).</li></ul>", "k": "Did you check each for special characters, a leading digit and keywords?" }, { "t": "2. Predict the output", "p": "What does this print?  <code>int x = 5, y = 5; cout &lt;&lt; ++x &lt;&lt; y-- &lt;&lt; endl;</code>", "a": "65", "s": "<p>It prints <b>65</b>. <code>++x</code> makes x 6 first, so 6 is printed. <code>y--</code> prints the current y (5) and then lowers it to 4.</p>" }, { "t": "3. Predict the output", "p": "What does this print?  <code>cout &lt;&lt; 9/2 &lt;&lt; \" \" &lt;&lt; 9%2 &lt;&lt; \" \" &lt;&lt; 9/2.0;</code>", "a": "4 1 4.5", "s": "<p>It prints <b>4 1 4.5</b>. 9/2 is integer division (4), 9%2 is the remainder (1), and 9/2.0 is real division (4.5).</p>" }, { "t": "4. Predict the output", "p": "What does this print?  <code>int c = 7; c += 3; c *= 2; cout &lt;&lt; c;</code>", "a": "20", "s": "<p>It prints <b>20</b>. c becomes 7 + 3 = 10, then 10 * 2 = 20.</p>" }, { "t": "5. Predict the output", "p": "What does this print?  <code>int num1 = 5, num2 = 3, num3 = 2; cout &lt;&lt; num1 &lt;&lt; num2 &lt;&lt; num3 &lt;&lt; endl;</code>", "a": "532", "s": "<p>It prints <b>532</b>. The three values are printed one after another with no spaces between them.</p>" }, { "t": "6. Define variables", "p": "Choose a suitable type and name for: age of a person, income of an employee, number of words in a dictionary, mark of a student, gender of a person.", "s": "<pre>int age;\ndouble income;\nlong numWords;      // could also be int\ndouble mark;        // or float\nchar gender;        // 'M' or 'F'</pre>", "k": "are your names meaningful, in camelCase, and is each type sensible?" }, { "t": "7. Write a program: Fahrenheit to Celsius", "p": "Read a temperature in Fahrenheit and print its Celsius equivalent. C = 5/9 × (F − 32).", "s": "<pre>#include &lt;iostream&gt;\nusing namespace std;\n\nint main() {\n    double f, c;\n    cout &lt;&lt; \"Enter temperature in Fahrenheit: \";\n    cin &gt;&gt; f;\n    c = 5.0 / 9 * (f - 32);\n    cout &lt;&lt; f &lt;&lt; \"F is \" &lt;&lt; c &lt;&lt; \"C\" &lt;&lt; endl;\n    return 0;\n}</pre>", "k": "did you use 5.0 (not 5) to avoid integer division?" }, { "t": "8. Write a program: wages", "p": "Base pay rate = 180.25 ETB per hour for up to 40 regular hours; overtime rate = 120 ETB per hour beyond 40. Read the hours worked and print the regular pay, overtime pay and total.", "s": "<pre>#include &lt;iostream&gt;\nusing namespace std;\n\nint main() {\n    const double RATE = 180.25, OT_RATE = 120.0;\n    const double REGULAR_HOURS = 40;\n    double hours, regular, overtime;\n    cout &lt;&lt; \"Hours worked: \";\n    cin &gt;&gt; hours;\n    regular  = (hours &lt;= REGULAR_HOURS ? hours : REGULAR_HOURS) * RATE;\n    overtime = (hours &gt; REGULAR_HOURS ? hours - REGULAR_HOURS : 0) * OT_RATE;\n    cout &lt;&lt; \"Regular: \" &lt;&lt; regular &lt;&lt; \"\\nOvertime: \" &lt;&lt; overtime\n         &lt;&lt; \"\\nTotal: \" &lt;&lt; regular + overtime &lt;&lt; endl;\n    return 0;\n}</pre><p>Assumption: the overtime rate is paid per overtime hour. The ternary operator avoids needing an if statement, which you meet in Chapter 3.</p>", "k": "did you use constants, and treat the first 40 hours separately from the rest?" }, { "t": "9. Write a program: 2 to the power n", "p": "Read a positive integer n and print 2 raised to the power n. Hint: use pow() from the math library.", "s": "<pre>#include &lt;iostream&gt;\n#include &lt;cmath&gt;\nusing namespace std;\n\nint main() {\n    int n;\n    cout &lt;&lt; \"Enter n: \";\n    cin &gt;&gt; n;\n    cout &lt;&lt; \"2^\" &lt;&lt; n &lt;&lt; \" = \" &lt;&lt; pow(2, n) &lt;&lt; endl;\n    return 0;\n}</pre>", "k": "did you include the cmath header?" }, { "t": "10. Write a program: sorted or not?", "p": "Read three numbers. Print “Sorted” if they are in ascending order, otherwise “Not sorted”. Hint: use the conditional operator.", "s": "<pre>#include &lt;iostream&gt;\nusing namespace std;\n\nint main() {\n    double a, b, c;\n    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;\n    cout &lt;&lt; ((a &lt;= b &amp;&amp; b &lt;= c) ? \"Sorted\" : \"Not sorted\") &lt;&lt; endl;\n    return 0;\n}</pre>", "k": "did you combine two comparisons with &amp;&amp;, rather than writing a &lt;= b &lt;= c?" }], Q = [["Who developed C++?", "Bjarne Stroustrup", "Dennis Ritchie", "Ken Thompson", "James Gosling"], ["Every C++ program must contain…", "a main() function", "a global variable", "a comment", "a namespace"], ["A preprocessor directive begins with…", "#", "//", "{", "&"], ["In which order do the six phases of running a C++ program occur?", "Edit, preprocess, compile, link, load, execute", "Edit, compile, preprocess, execute, link, load", "Compile, edit, link, preprocess, load, execute", "Load, link, compile, preprocess, edit, execute"], ["Which program combines your object code with library code to make an executable?", "The linker", "The preprocessor", "The loader", "The editor"], ["What does cin >> x; do?", "Reads a value from the keyboard into x", "Prints x on the screen", "Declares x", "Compares x with something"], ["Which is a valid identifier?", "seven_11", "2by2", "gross-income", "object.oriented"], ["What is 9 / 2 when both are int?", "4", "4.5", "5", "1"], ["What is 9 % 2?", "1", "4", "0", "4.5"], ["After  int a = 5; int b = a++;  the values are…", "a = 6 and b = 5", "a = 5 and b = 6", "a = 6 and b = 6", "a = 5 and b = 5"], ["Which gives the correct average of an int sum over 100?", "(double)sum / 100", "(double)(sum / 100)", "sum / 100", "int(sum) / 100"], ["What happens with  const int N = 22; N = 30;", "A compile-time error", "N becomes 30", "A runtime error", "Nothing at all"], ["A missing semicolon is which kind of error?", "Syntax (compile-time) error", "Runtime error", "Logical error", "Not an error"], ["unsigned short n = 65535; n = n + 1;  What is n?", "0", "65536", "-1", "It stops with an error"], ["Which operator is evaluated first in  a + b * c ?", "*", "+", "They are equal", "=="], ["setfill('*') << setw(5) << 'a'  prints…", "****a", "a****", "*a", "a"]];
+            var ex = document.getElementById('ex');
+            EX.forEach(function (e) {
+                var d = document.createElement('div'); d.className = 'exq';
+                d.innerHTML = '<b>' + e.t + '</b><p style="margin:.3em 0">' + e.p + '</p><' + (e.a ? 'input style="width:100%;box-sizing:border-box;padding:8px;border-radius:8px;border:1px solid var(--bd);background:var(--code);color:var(--fg);font:14px ui-monospace,monospace" placeholder="Type the output…"' : 'textarea placeholder="Write your code or steps here…"></textarea') + '>' + '<button class="btn">Submit my answer</button><span class="msg"></span><div class="sol" hidden><b>Model answer</b>' + e.s + (e.k ? '<p><i>Compare with yours:</i> ' + e.k + '</p>' : '') + '</div>';
+                var b = d.querySelector('button'), t = d.querySelector(e.a ? 'input' : 'textarea'), m = d.querySelector('.msg'), s = d.querySelector('.sol');
+                b.onclick = function () {
+                    var v = t.value.trim();
+                    if (e.a) { if (!v) { m.textContent = 'Type your prediction first.'; return } var ok = v.replace(/\s+/g, '') === e.a.replace(/\s+/g, ''); m.textContent = ok ? 'Correct!' : 'Not quite. See the explanation.'; m.style.color = ok ? '#2e9b57' : '#c0392b'; }
+                    else if (v.length < 20) { m.textContent = 'Write a few lines first, then submit.'; return } else m.textContent = '';
+                    s.hidden = false; b.disabled = true; t.readOnly = true;
+                }; ex.appendChild(d)
+            });
+            var qz = document.getElementById('quiz'), sc = document.getElementById('score'), n, r;
+            function sh(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x } return a }
+            function upd() { sc.textContent = 'Score: ' + r + ' / ' + Q.length + '  ·  answered ' + n }
+            function build() {
+                qz.innerHTML = ''; n = 0; r = 0; upd();
+                Q.forEach(function (q, i) {
+                    var o = sh(q.slice(1)), ci = o.indexOf(q[1]); var d = document.createElement('div'); d.className = 'q'; d.innerHTML = '<b>' + (i + 1) + '. ' + q[0].replace(/</g, '&lt;') + '</b>';
+                    var w = document.createElement('div'); w.className = 'why'; w.hidden = true; var done = false, bs = [];
+                    o.forEach(function (t, j) {
+                        var b = document.createElement('button'); b.className = 'o'; b.textContent = t; bs.push(b);
+                        b.onclick = function () { if (done) return; done = true; n++; if (j === ci) { r++; b.classList.add('ok'); w.textContent = 'Correct.' } else { b.classList.add('no'); bs[ci].classList.add('ok'); w.textContent = 'Not quite. The correct answer is highlighted.' } w.hidden = false; upd() }; d.appendChild(b)
+                    });
+                    d.appendChild(w); qz.appendChild(d)
+                })
+            }
+            document.getElementById('rst').onclick = build; build()
+        })();</script>
+</body>
+
+</html>

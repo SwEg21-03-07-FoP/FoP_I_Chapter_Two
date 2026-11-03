@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Workspace</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: #555;
+            transition: background 0.2s;
+        }
+        header a:hover {
+            background-color: #007bff;
+        }
+        iframe {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- The 'target' attribute tells the browser to open the link inside the iframe below -->
+        <a href="./Chapter_Two_Lecture_Note.html" target="app-frame">Lecture Note</a>
+        <a href="./Flowchart_Practice_Exercises.html" target="app-frame">Practical Exercises</a>
+        <a href="./Exercises_Solution.html" target="app-frame">Exercises Soultions</a>
+        <a href="./Revision_Quiz_MCQ.html" target="app-frame">Revision Quiz - MCQ</a>
+    </header>
+
+    <!-- 'src' points to app-one, making it the default page that loads -->
+    <iframe src="./Chapter_Two_Lecture_Note.html" name="app-frame"></iframe>
+
+</body>
+</html>

@@ -292,8 +292,7 @@
 			<pre>
 const double VAT_RATE = 0.15;
 const int BULK_QTY = 10;
-const double BULK_EXTRA = 5.0;</pre
-			>
+const double BULK_EXTRA = 5.0;</pre>
 			<p><b>4.3 Reading the input</b></p>
 			<pre>
 cout &lt;&lt; "Enter unit price, quantity and discount rate (%) separated by space: ";
@@ -377,6 +376,7 @@ Total due: 517.50</pre
 					<li>Check by hand: 100 × 12 = 1200; 15% of it is 180; 1020 × 0.15 = 153; 1020 + 153 = 1173.</li>
 				</ul>
 			</div>
+
 			<h2>Example 2: Change from a cashier</h2>
 			<h3>1. Problem description</h3>
 			<p>
@@ -404,47 +404,28 @@ Total due: 517.50</pre
 				<li>Read the amount due and the amount paid.</li>
 				<li>Calculate the change as amount paid − amount due.</li>
 				<li>
-					For each value from largest to smallest: the <b>number</b> = rest ÷ value (integer division), and the
+					Determine the number of notes: Divide the change by each notes by keeping the reminder:
+				</b> rest ÷ value (integer division), and the
 					<b>new rest</b> = rest % value.
 				</li>
 				<li>Print the change and the five counts.</li>
 			</ul>
 			<h3>4. Design the program</h3>
-			<p><b>4.1 Variables</b></p>
-			<div class="tw">
-				<table>
-					<tr>
-						<th>Variable</th>
-						<th>Type</th>
-						<th>Purpose</th>
-					</tr>
-					<tr>
-						<td>amountDue, amountPaid</td>
-						<td>int</td>
-						<td>The two inputs, whole birr.</td>
-					</tr>
-					<tr>
-						<td>change</td>
-						<td>int</td>
-						<td>amountPaid − amountDue.</td>
-					</tr>
-					<tr>
-						<td>rest</td>
-						<td>int</td>
-						<td>What is still to be given back as we go.</td>
-					</tr>
-					<tr>
-						<td>notes100, notes50, notes10, notes5, coins1</td>
-						<td>int</td>
-						<td>How many of each.</td>
-					</tr>
-				</table>
-			</div>
+			<p><b>4.1 Variables Definition</b></p>
+
+			<pre>
+int amountDue, amountPaid; 		//Holds the two inputs, whole birr
+int change; 				//Hold the change - amountPaid − amountDue.
+int rest; 				//hold the reminder as we go diving the change by each notes.
+
+int notes100, notes50, notes10, notes5, coins1; //hold the number of each note for the change.
+				</pre>
+
 			<p><b>4.2 Reading the input</b></p>
 			<pre>
 cout &lt;&lt; "Enter the amount due and the amount paid (whole birr): ";
-cin &gt;&gt; amountDue &gt;&gt; amountPaid;</pre
-			>
+cin &gt;&gt; amountDue &gt;&gt; amountPaid;</pre>
+
 			<p><b>4.3 Calculation</b> (<code>/</code> counts, <code>%</code> leaves the rest)</p>
 			<pre>
 change   = amountPaid - amountDue;

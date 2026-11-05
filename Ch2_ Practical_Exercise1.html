@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chapter 2: Practical Quiz Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --fg: #1d2433;
+            --mu: #5b6475;
+            --ac: #1f5f8b;
+            --card: #fff;
+            --bd: #dfe3ea;
+            --code: #eef2f7;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #13171f;
+                --fg: #e8ebf1;
+                --mu: #98a2b3;
+                --ac: #6cb4e4;
+                --card: #1b212c;
+                --bd: #2c3442;
+                --code: #232b38;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #13171f;
+            --fg: #e8ebf1;
+            --mu: #98a2b3;
+            --ac: #6cb4e4;
+            --card: #1b212c;
+            --bd: #2c3442;
+            --code: #232b38;
+            color-scheme: dark
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 17px/1.65 Georgia, 'Times New Roman', serif
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 36px 20px 60px
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 38px);
+            line-height: 1.2;
+            text-align: center;
+            margin: .2em 0
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--mu);
+            margin-bottom: 28px
+        }
+
+        h2 {
+            margin-top: 2.2em;
+            padding-top: .4em;
+            border-top: 2px solid var(--ac);
+            font-size: 24px
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 1.2em 0 .2em;
+            color: var(--ac)
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 12px 0
+        }
+
+        .tip {
+            background: var(--code);
+            border-left: 4px solid var(--ac);
+            border-radius: 6px;
+            padding: 10px 16px;
+            margin: 14px 0;
+            font-size: 16px
+        }
+
+        .tip b:first-child {
+            display: block;
+            font: 700 12px system-ui;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--ac);
+            margin-bottom: 2px
+        }
+
+        .tw {
+            overflow-x: auto
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 15px
+        }
+
+        th,
+        td {
+            border: 1px solid var(--bd);
+            padding: 7px 10px;
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            background: var(--code);
+            font-family: system-ui
+        }
+
+        pre {
+            background: var(--code);
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font: 14px/1.5 ui-monospace, Menlo, monospace
+        }
+
+        code {
+            background: var(--code);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font: .9em ui-monospace, Menlo, monospace
+        }
+
+        .mu {
+            color: var(--mu);
+            font-size: 15px
+        }
+
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            font: 14px system-ui;
+            margin: 12px 0
+        }
+
+        .flow span {
+            border: 2px solid var(--ac);
+            border-radius: 8px;
+            padding: 6px 10px;
+            background: var(--card)
+        }
+
+        .flow i {
+            color: var(--ac);
+            font-style: normal
+        }
+
+        .tag {
+            font: 600 12px system-ui;
+            border-radius: 10px;
+            padding: 2px 10px;
+            margin-left: 8px;
+            background: var(--code);
+            color: var(--ac)
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <p style="text-align: center; font-size: x-large; font-weight: bolder;">Fundamentals of Programming I <br>
+			Chapter 2: Basic Programming Constructors
+		</p>
+		<h3>Practical Quiz Tasks</h3>        
+        <div class="card"><b>Instructions</b>
+            <ul>
+                <li>Work on each task in the <b>same five steps</b> as the examples: problem description, analysis
+                    (input and output), process, design (variables, types, constants, statements), then code.</li>
+                <li>For each task write: (a) the inputs and outputs, (b) the process as a numbered list, (c) a table of
+                    variables with types and the constants, and (d) the complete C++ program.</li>
+                <li>Use only Chapter 2 tools: input/output, variables, constants, operators, the conditional operator,
+                    casting and <code>&lt;iomanip&gt;</code>. No <code>if</code> and no loops.</li>
+                <li>Compile and run your program with the test data. Use meaningful names and comments.</li>
+            </ul>
+        </div>
+        <div class="tw">
+            <table>
+                <tr>
+                    <th>Marks per task</th>
+                    <th>Out of</th>
+                </tr>
+                <tr>
+                    <td>(a) and (b) Analysis: inputs, outputs, process</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>(c) Design: suitable types, constants, meaningful names</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>(d) Code: compiles, correct formulas, correct output format</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><b>Total per task</b></td>
+                    <td><b>10</b></td>
+                </tr>
+            </table>
+        </div>
+        <h2>Task 1: Student course total<span class="tag">10 marks</span></h2>
+        <p>Write a C++ program that reads a student’s <b>assignment</b>, <b>midterm</b> and <b>final</b> marks (each out
+            of 100). The course total is <b>20%</b> assignment + <b>30%</b> midterm + <b>50%</b> final. The pass mark is
+            <b>50</b>. Print the total (one decimal place) and the word <b>Pass</b> or <b>Fail</b>. Use the conditional
+            operator (no <code>if</code>).</p>
+        <p class="mu"><b>Test data:</b> 80, 60, 70 gives 69.0 and Pass. 40, 30, 45 gives 39.5 and Fail.</p>
+        <h2>Task 2: Electricity bill<span class="tag">10 marks</span></h2>
+        <p>Write a C++ program that reads the electricity <b>units</b> (kWh, a whole number) used in a month. The
+            <b>first 50 units</b> cost <b>1.50 birr</b> each and every unit above 50 costs <b>2.00 birr</b>. A fixed
+            <b>service charge of 10 birr</b> is added. Print the energy charge, the service charge and the total bill
+            (two decimals). Use the conditional operator (no <code>if</code>).</p>
+        <p class="mu"><b>Test data:</b> 80 units gives energy 135.00 and total 145.00. 30 units gives energy 45.00 and
+            total 55.00.</p>
+        <h2>Task 3: Trip speed and fuel cost<span class="tag">10 marks</span></h2>
+        <p>Write a C++ program that reads the <b>distance</b> of a trip in km, the travel time as <b>hours</b> and
+            <b>minutes</b> (whole numbers), the car’s fuel use in <b>liters per 100 km</b> and the <b>price per
+                liter</b> (birr). Print the average speed (km/h), the fuel used (liters) and the fuel cost (birr), each
+            with two decimals.</p>
+        <p class="mu"><b>Test data:</b> 150 km, 2 h 30 min, 8 L per 100 km, 60 birr per liter gives 60.00 km/h, 12.00
+            liters and 720.00 birr.</p>
+    </main>
+</body>
+
+</html>

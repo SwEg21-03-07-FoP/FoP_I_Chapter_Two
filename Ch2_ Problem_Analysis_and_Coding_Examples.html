@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Chapter 2: Problem Analysis and Coding Examples</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<style>
+			:root {
+				--bg: #fafaf7;
+				--fg: #1d2433;
+				--mu: #5b6475;
+				--ac: #1f5f8b;
+				--card: #fff;
+				--bd: #dfe3ea;
+				--code: #eef2f7;
+				box-sizing: border-box;
+				padding-top: env(safe-area-inset-top, 0px);
+				padding-bottom: env(safe-area-inset-bottom, 0px);
+				color-scheme: light;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root:not([data-theme="light"]) {
+					--bg: #13171f;
+					--fg: #e8ebf1;
+					--mu: #98a2b3;
+					--ac: #6cb4e4;
+					--card: #1b212c;
+					--bd: #2c3442;
+					--code: #232b38;
+					color-scheme: dark;
+				}
+			}
+			:root[data-theme="dark"] {
+				--bg: #13171f;
+				--fg: #e8ebf1;
+				--mu: #98a2b3;
+				--ac: #6cb4e4;
+				--card: #1b212c;
+				--bd: #2c3442;
+				--code: #232b38;
+				color-scheme: dark;
+			}
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--fg);
+				font:
+					17px/1.65 Georgia,
+					"Times New Roman",
+					serif;
+			}
+			main {
+				max-width: 820px;
+				margin: 0 auto;
+				padding: 36px 20px 60px;
+			}
+			h1 {
+				font-size: clamp(26px, 5vw, 38px);
+				line-height: 1.2;
+				text-align: center;
+				margin: 0.2em 0;
+			}
+			.sub {
+				text-align: center;
+				color: var(--mu);
+				margin-bottom: 28px;
+			}
+			h2 {
+				margin-top: 2.2em;
+				padding-top: 0.4em;
+				border-top: 2px solid var(--ac);
+				font-size: 24px;
+			}
+			h3 {
+				font-size: 18px;
+				margin: 1.2em 0 0.2em;
+				color: var(--ac);
+			}
+			.card {
+				background: var(--card);
+				border: 1px solid var(--bd);
+				border-radius: 10px;
+				padding: 12px 18px;
+				margin: 12px 0;
+			}
+			.tip {
+				background: var(--code);
+				border-left: 4px solid var(--ac);
+				border-radius: 6px;
+				padding: 10px 16px;
+				margin: 14px 0;
+				font-size: 16px;
+			}
+			.tip b:first-child {
+				display: block;
+				font: 700 12px system-ui;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--ac);
+				margin-bottom: 2px;
+			}
+			.tw {
+				overflow-x: auto;
+			}
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				font-size: 15px;
+			}
+			th,
+			td {
+				border: 1px solid var(--bd);
+				padding: 7px 10px;
+				text-align: left;
+				vertical-align: top;
+			}
+			th {
+				background: var(--code);
+				font-family: system-ui;
+			}
+			pre {
+				background: var(--code);
+				padding: 12px 16px;
+				border-radius: 8px;
+				overflow-x: auto;
+				font:
+					14px/1.5 ui-monospace,
+					Menlo,
+					monospace;
+			}
+			code {
+				background: var(--code);
+				padding: 1px 5px;
+				border-radius: 4px;
+				font:
+					0.9em ui-monospace,
+					Menlo,
+					monospace;
+			}
+			.mu {
+				color: var(--mu);
+				font-size: 15px;
+			}
+			.flow {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+				align-items: center;
+				font: 14px system-ui;
+				margin: 12px 0;
+			}
+			.flow span {
+				border: 2px solid var(--ac);
+				border-radius: 8px;
+				padding: 6px 10px;
+				background: var(--card);
+			}
+			.flow i {
+				color: var(--ac);
+				font-style: normal;
+			}
+			.tag {
+				font: 600 12px system-ui;
+				border-radius: 10px;
+				padding: 2px 10px;
+				margin-left: 8px;
+				background: var(--code);
+				color: var(--ac);
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<p style="text-align: center; font-size: x-large; font-weight: bolder;">Fundamentals of Programming I <br>
+				Chapter 2: Basic Programming Constructors
+			</p>
+			<h3>Problem Analysis and Coding Examples</h3>
+			<div class="card">
+				<p>
+					Writing code is the <i>last</i> step. When you analyze and design first, the code almost writes itself. Follow the
+					same five steps every time:
+				</p>
+				<div class="flow">
+					<span>1 Problem description</span><i>→</i><span>2 Analysis: input and output</span><i>→</i><span>3 Process</span
+					><i>→</i><span>4 Design</span><i>→</i><span>5 Write the code</span>
+				</div>
+				<ul>
+					<li><b>Analysis:</b> what goes in, and what must come out?</li>
+					<li><b>Process:</b> the list of operations that turn input into output.</li>
+					<li>
+						<b>Design:</b> decide the variables and their types, the constants, and the exact statements for reading,
+						calculating and printing.
+					</li>
+					<li><b>Code:</b> type the design. Each design step becomes a block of code. Then test.</li>
+				</ul>
+			</div>
+			<h2>Example 1: A shop bill with discount and VAT</h2>
+			<h3>1. Problem description</h3>
+			<p>
+				Write a C++ program to calculate the amount a customer must pay in a shop. The program reads the unit price, the
+				quantity bought and the discount rate (%). Orders of <b>more than 10 items</b> get an <b>extra 5%</b> discount. VAT
+				of <b>15%</b> is added after the discount.
+			</p>
+			<div class="tw">
+				<table>
+					<tr>
+						<th>Quantity</th>
+						<th>Formula</th>
+					</tr>
+					<tr>
+						<td>subtotal</td>
+						<td>unitPrice × quantity</td>
+					</tr>
+					<tr>
+						<td>discount</td>
+						<td>subtotal × (discountRate + extra) / 100</td>
+					</tr>
+					<tr>
+						<td>taxable</td>
+						<td>subtotal − discount</td>
+					</tr>
+					<tr>
+						<td>VAT</td>
+						<td>taxable × 0.15</td>
+					</tr>
+					<tr>
+						<td>total due</td>
+						<td>taxable + VAT</td>
+					</tr>
+				</table>
+			</div>
+			<h3>2. Problem analysis</h3>
+			<div class="card">
+				<b>2.1 Input</b>
+				<ul>
+					<li>Unit price</li>
+					<li>Quantity bought</li>
+					<li>Discount rate (%)</li>
+				</ul>
+				<b>2.2 Output</b>
+				<ul>
+					<li>Subtotal, discount, VAT</li>
+					<li>Total due (the main result)</li>
+				</ul>
+			</div>
+			<h3>3. Process (operations)</h3>
+			<ul>
+				<li>Declare variables to hold the input and the results.</li>
+				<li>Define the fixed values (VAT rate, bulk limit, bulk extra discount) as constants.</li>
+				<li>Print a prompt and read the three inputs.</li>
+				<li>Decide the extra discount: 5% if the quantity is more than 10, otherwise 0.</li>
+				<li>Calculate subtotal, discount, taxable amount, VAT and total.</li>
+				<li>Print the results with two decimal places.</li>
+			</ul>
+			<h3>4. Design the program</h3>
+			<p><b>4.1 Variables: what and how?</b></p>
+			<div class="tw">
+				<table>
+					<tr>
+						<th>Variable</th>
+						<th>Type</th>
+						<th>Why this type</th>
+					</tr>
+					<tr>
+						<td>unitPrice</td>
+						<td>double</td>
+						<td>Prices have decimals.</td>
+					</tr>
+					<tr>
+						<td>quantity</td>
+						<td>int</td>
+						<td>You buy whole items.</td>
+					</tr>
+					<tr>
+						<td>discountRate</td>
+						<td>double</td>
+						<td>May be 7.5%.</td>
+					</tr>
+					<tr>
+						<td>extraRate</td>
+						<td>double = 0.0</td>
+						<td>Starts at 0, changed only for bulk orders.</td>
+					</tr>
+					<tr>
+						<td>subtotal, discount, taxable, vat, total</td>
+						<td>double</td>
+						<td>Money results with decimals.</td>
+					</tr>
+				</table>
+			</div>
+			<p><b>4.2 Constants</b></p>
+			<pre>
+const double VAT_RATE = 0.15;
+const int BULK_QTY = 10;
+const double BULK_EXTRA = 5.0;</pre
+			>
+			<p><b>4.3 Reading the input</b></p>
+			<pre>
+cout &lt;&lt; "Enter unit price, quantity and discount rate (%) separated by space: ";
+cin &gt;&gt; unitPrice &gt;&gt; quantity &gt;&gt; discountRate;</pre
+			>
+			<p><b>4.4 Calculation</b></p>
+			<pre>
+subtotal  = unitPrice * quantity;
+extraRate = (quantity &gt; BULK_QTY) ? BULK_EXTRA : 0.0;
+discount  = subtotal * (discountRate + extraRate) / 100;
+taxable   = subtotal - discount;
+vat       = taxable * VAT_RATE;
+total     = taxable + vat;</pre
+			>
+			<p><b>4.5 Printing the result</b></p>
+			<pre>
+cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+cout &lt;&lt; "Total due: " &lt;&lt; total &lt;&lt; endl;</pre
+			>
+			<h3>5. Write the code</h3>
+			<pre>
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    // Steps 4.1 and 4.2: constants and variables
+    const double VAT_RATE = 0.15;
+    const int BULK_QTY = 10;          // more than this counts as a bulk order
+    const double BULK_EXTRA = 5.0;    // extra discount (%) for bulk orders
+    double unitPrice, discountRate, extraRate = 0.0;
+    double subtotal, discount, taxable, vat, total;
+    int quantity;
+
+    // Step 4.3: read the input
+    cout &lt;&lt; "Enter unit price, quantity and discount rate (%) separated by space: ";
+    cin &gt;&gt; unitPrice &gt;&gt; quantity &gt;&gt; discountRate;
+
+    // Step 4.4: calculate
+    subtotal  = unitPrice * quantity;
+    extraRate = (quantity &gt; BULK_QTY) ? BULK_EXTRA : 0.0;
+    discount  = subtotal * (discountRate + extraRate) / 100;
+    taxable   = subtotal - discount;
+    vat       = taxable * VAT_RATE;
+    total     = taxable + vat;
+
+    // Step 4.5: print the result
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Subtotal : " &lt;&lt; subtotal &lt;&lt; endl;
+    cout &lt;&lt; "Discount : " &lt;&lt; discount &lt;&lt; endl;
+    cout &lt;&lt; "VAT (15%): " &lt;&lt; vat &lt;&lt; endl;
+    cout &lt;&lt; "Total due: " &lt;&lt; total &lt;&lt; endl;
+    return 0;
+}</pre
+			>
+			<p class="mu"><b>Sample run 1</b> (a bulk order):</p>
+			<pre>
+Enter unit price, quantity and discount rate (%) separated by space: 100 12 10
+Subtotal : 1200.00
+Discount : 180.00
+VAT (15%): 153.00
+Total due: 1173.00</pre
+			>
+			<p class="mu"><b>Sample run 2</b> (not a bulk order):</p>
+			<pre>
+Enter unit price, quantity and discount rate (%) separated by space: 100 5 10
+Subtotal : 500.00
+Discount : 50.00
+VAT (15%): 67.50
+Total due: 517.50</pre
+			>
+			<div class="tip">
+				<b>Why these choices</b>
+				<ul>
+					<li>
+						The conditional operator <code>?:</code> makes the “only if” decision without <code>if</code>. In Chapter 3 you
+						can write the same thing with <code>if</code>.
+					</li>
+					<li>The discount is a percentage, so divide by 100 once.</li>
+					<li>Constants are named, so a change in the VAT rate is made in one place.</li>
+					<li>Check by hand: 100 × 12 = 1200; 15% of it is 180; 1020 × 0.15 = 153; 1020 + 153 = 1173.</li>
+				</ul>
+			</div>
+			<h2>Example 2: Change from a cashier</h2>
+			<h3>1. Problem description</h3>
+			<p>
+				A cashier gives change using the fewest notes and coins of <b>100, 50, 10, 5 and 1 birr</b>. Write a C++ program
+				that reads the amount due and the amount paid (whole birr; the customer always pays enough), and prints the change
+				and how many of each note or coin to give.
+			</p>
+			<h3>2. Problem analysis</h3>
+			<div class="card">
+				<b>2.1 Input</b>
+				<ul>
+					<li>Amount due</li>
+					<li>Amount paid</li>
+				</ul>
+				<b>2.2 Output</b>
+				<ul>
+					<li>The change</li>
+					<li>Number of 100, 50, 10 and 5 birr notes, and 1 birr coins</li>
+				</ul>
+			</div>
+
+			<h3>3. Process (operations)</h3>
+			<ul>
+				<li>Declare integer variables (all amounts are whole birr).</li>
+				<li>Read the amount due and the amount paid.</li>
+				<li>Calculate the change as amount paid − amount due.</li>
+				<li>
+					For each value from largest to smallest: the <b>number</b> = rest ÷ value (integer division), and the
+					<b>new rest</b> = rest % value.
+				</li>
+				<li>Print the change and the five counts.</li>
+			</ul>
+			<h3>4. Design the program</h3>
+			<p><b>4.1 Variables</b></p>
+			<div class="tw">
+				<table>
+					<tr>
+						<th>Variable</th>
+						<th>Type</th>
+						<th>Purpose</th>
+					</tr>
+					<tr>
+						<td>amountDue, amountPaid</td>
+						<td>int</td>
+						<td>The two inputs, whole birr.</td>
+					</tr>
+					<tr>
+						<td>change</td>
+						<td>int</td>
+						<td>amountPaid − amountDue.</td>
+					</tr>
+					<tr>
+						<td>rest</td>
+						<td>int</td>
+						<td>What is still to be given back as we go.</td>
+					</tr>
+					<tr>
+						<td>notes100, notes50, notes10, notes5, coins1</td>
+						<td>int</td>
+						<td>How many of each.</td>
+					</tr>
+				</table>
+			</div>
+			<p><b>4.2 Reading the input</b></p>
+			<pre>
+cout &lt;&lt; "Enter the amount due and the amount paid (whole birr): ";
+cin &gt;&gt; amountDue &gt;&gt; amountPaid;</pre
+			>
+			<p><b>4.3 Calculation</b> (<code>/</code> counts, <code>%</code> leaves the rest)</p>
+			<pre>
+change   = amountPaid - amountDue;
+notes100 = change / 100;   rest = change % 100;
+notes50  = rest / 50;      rest %= 50;
+notes10  = rest / 10;      rest %= 10;
+notes5   = rest / 5;       rest %= 5;
+coins1   = rest;</pre
+			>
+			<p><b>Trace by hand</b> for due 463, paid 1000 (change 537):</p>
+			<div class="tw">
+				<table>
+					<tr>
+						<th>Step</th>
+						<th>Count (rest ÷ value)</th>
+						<th>Rest after</th>
+					</tr>
+					<tr>
+						<td>100 birr</td>
+						<td>537 / 100 = 5</td>
+						<td>537 % 100 = 37</td>
+					</tr>
+					<tr>
+						<td>50 birr</td>
+						<td>37 / 50 = 0</td>
+						<td>37 % 50 = 37</td>
+					</tr>
+					<tr>
+						<td>10 birr</td>
+						<td>37 / 10 = 3</td>
+						<td>37 % 10 = 7</td>
+					</tr>
+					<tr>
+						<td>5 birr</td>
+						<td>7 / 5 = 1</td>
+						<td>7 % 5 = 2</td>
+					</tr>
+					<tr>
+						<td>1 birr</td>
+						<td>2</td>
+						<td>0</td>
+					</tr>
+				</table>
+			</div>
+			<h3>5. Write the code</h3>
+			<pre>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Step 4.1: variables
+    int amountDue, amountPaid, change, rest;
+    int notes100, notes50, notes10, notes5, coins1;
+
+    // Step 4.2: read the input
+    cout &lt;&lt; "Enter the amount due and the amount paid (whole birr): ";
+    cin &gt;&gt; amountDue &gt;&gt; amountPaid;
+
+    // Step 4.3: calculate the change and the notes
+    change   = amountPaid - amountDue;
+    notes100 = change / 100;   rest = change % 100;
+    notes50  = rest / 50;      rest %= 50;
+    notes10  = rest / 10;      rest %= 10;
+    notes5   = rest / 5;       rest %= 5;
+    coins1   = rest;
+
+    // Step 4.4: print the result
+    cout &lt;&lt; "Change: " &lt;&lt; change &lt;&lt; " birr" &lt;&lt; endl;
+    cout &lt;&lt; "100 birr notes: " &lt;&lt; notes100 &lt;&lt; endl;
+    cout &lt;&lt; "50 birr notes : " &lt;&lt; notes50 &lt;&lt; endl;
+    cout &lt;&lt; "10 birr notes : " &lt;&lt; notes10 &lt;&lt; endl;
+    cout &lt;&lt; "5 birr notes  : " &lt;&lt; notes5 &lt;&lt; endl;
+    cout &lt;&lt; "1 birr coins  : " &lt;&lt; coins1 &lt;&lt; endl;
+    return 0;
+}</pre
+			>
+			<p class="mu"><b>Sample run:</b></p>
+			<pre>
+Enter the amount due and the amount paid (whole birr): 463 1000
+Change: 537 birr
+100 birr notes: 5
+50 birr notes : 0
+10 birr notes : 3
+5 birr notes  : 1
+1 birr coins  : 2</pre
+			>
+			<div class="tip">
+				<b>Why these choices</b>
+				<ul>
+					<li>
+						Everything is <code>int</code>. With <code>double</code>, <code>%</code> would not even compile, and decimals are
+						not needed.
+					</li>
+					<li>Integer division is the <b>goal</b> here: 537 / 100 must give 5, not 5.37.</li>
+					<li>Always go from the largest value to the smallest, so the fewest notes are used.</li>
+					<li><code>rest %= 50;</code> is the compound form of <code>rest = rest % 50;</code>.</li>
+				</ul>
+			</div>
+		</main>
+	</body>
+</html>

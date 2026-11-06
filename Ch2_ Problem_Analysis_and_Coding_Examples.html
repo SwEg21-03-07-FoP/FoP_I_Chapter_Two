@@ -606,6 +606,15 @@ coins1   = rest;</pre
 					</tr>
 				</table>
 			</div>
+			<p><b>4.4 Printing the result</b></p>
+			<pre>
+cout &lt;&lt; "Change: " &lt;&lt; change &lt;&lt; " birr" &lt;&lt; endl;
+cout &lt;&lt; "100 birr notes: " &lt;&lt; notes100 &lt;&lt; endl;
+cout &lt;&lt; "50 birr notes : " &lt;&lt; notes50 &lt;&lt; endl;
+cout &lt;&lt; "10 birr notes : " &lt;&lt; notes10 &lt;&lt; endl;
+cout &lt;&lt; "5 birr notes  : " &lt;&lt; notes5 &lt;&lt; endl;
+cout &lt;&lt; "1 birr coins  : " &lt;&lt; coins1 &lt;&lt; endl;			
+			</pre>
 			<h3>5. Write the code</h3>
 			<pre>
 #include &lt;iostream&gt;
@@ -721,6 +730,12 @@ Change: 537 birr
         <ul>
             <li>Print the surcharge and the total fare with two decimals.</li>
         </ul>
+		<pre>
+cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+cout &lt;&lt; "Surcharge: " &lt;&lt; surcharge &lt;&lt; endl;
+cout &lt;&lt; "Total fare: " &lt;&lt; fare &lt;&lt; endl;	
+		</pre>
+		
         <h3>5. Write the code</h3>
         <pre>#include &lt;iostream&gt;
 #include &lt;iomanip&gt;
@@ -813,6 +828,7 @@ Total fare: 360.00</pre>
                     <li><code>double average = total / 5;</code></li>
                     <li><code>(average &gt;= PASS_MARK ? "Pass" : "Fail")</code></li>
                 </ul>
+				
                 <h3>5. Write the code</h3>
                 <pre>#include &lt;iostream&gt;
 #include &lt;iomanip&gt;

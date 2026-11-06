@@ -49,6 +49,77 @@
 					"Times New Roman",
 					serif;
 			}
+
+        nav {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--bd);
+            padding: 10px 16px;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            white-space: nowrap;
+            z-index: 5;
+            font: 14px system-ui, sans-serif
+        }
+
+        nav a {
+            color: var(--mu);
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 14px
+        }
+
+        nav a:hover {
+            background: var(--code);
+            color: var(--ac)
+        }
+
+        nav b {
+            display: none
+        }
+
+        @media(min-width:900px) {
+            html {
+                scroll-padding-top: 20px
+            }
+
+            body {
+                padding-left: 250px
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 250px;
+                box-sizing: border-box;
+                flex-direction: column;
+                gap: 2px;
+                padding: calc(24px + env(safe-area-inset-top, 0px)) 14px 24px;
+                border-bottom: 0;
+                border-right: 1px solid var(--bd);
+                overflow-y: auto;
+                white-space: normal;
+                font-size: 15px
+            }
+
+            nav b {
+                display: block;
+                font: 700 12px system-ui;
+                letter-spacing: .08em;
+                text-transform: uppercase;
+                color: var(--ac);
+                padding: 0 10px 10px
+            }
+
+            nav a {
+                border-radius: 8px;
+                padding: 7px 10px
+            }
+        }
 			main {
 				max-width: 820px;
 				margin: 0 auto;
@@ -223,6 +294,14 @@
 		</style>
 	</head>
 	<body>
+		<nav>
+	        <b>Contents</b>
+	        <a href="#about">C++ Overview</a>
+	        <a href="#anatomy">Program Anatomy</a>
+	        <a href="#compile">Compilation Process</a>
+	        <a href="#pre">Preprocessor Directive</a>
+	        <a href="#io">Input / output Stream</a>
+        </nav>
 		<main>
 			<p style="text-align: center; font-size: x-large; font-weight: bolder;">Fundamentals of Programming I <br>
 				Chapter 2: Basic Programming Constructors

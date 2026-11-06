@@ -524,6 +524,367 @@ Change: 537 birr
 					<li><code>rest %= 50;</code> is the compound form of <code>rest = rest % 50;</code>.</li>
 				</ul>
 			</div>
+
+			        <h2 id="ex2">Worked example 2: Taxi fare</h2>
+        <h3>1. Problem description</h3>
+        <p>Write a C++ program to calculate the <b>fare of a taxi trip</b>. The fare is a base fare plus a charge per
+            kilometre plus a charge per minute of waiting. If the trip is longer than 20 km, the program asks for a
+            <b>surcharge per extra km</b> and adds it for each kilometre beyond
+            20.<br><code>fare = base fare + distance × rate per km + waiting minutes × wait rate + surcharge</code>
+        </p>
+        <div class="grid">
+            <div class="card">
+                <h3>2.1 Input</h3>
+                <ul>
+                    <li>distance (km)</li>
+                    <li>waiting time (minutes)</li>
+                    <li>surcharge per extra km, only if distance &gt; 20</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>2.2 Output</h3>
+                <ul>
+                    <li>the total fare</li>
+                    <li>in addition: the surcharge</li>
+                </ul>
+            </div>
+        </div>
+        <h3>3. Process / operation</h3>
+        <ul>
+            <li>Declare variables for the inputs and results.</li>
+            <li>Define the base fare, rate per km, wait rate and long-trip limit as constants.</li>
+            <li>Initialize the surcharge to zero.</li>
+            <li>Print prompts and read the input.</li>
+            <li>Check whether the distance exceeds 20 km. If so, read the surcharge rate and compute surcharge =
+                (distance − 20) × rate.</li>
+            <li>Calculate the fare.</li>
+            <li>Print the result.</li>
+        </ul>
+        <h3>4. Design the program</h3>
+        <p style="margin:.4em 0 0"><b>3.1 Variable declaration and initialization</b></p>
+        <ul>
+            <li><code>double distance, surchargeRate, surcharge = 0.0;</code></li>
+            <li><code>int waitMinutes;</code></li>
+        </ul>
+        <p style="margin:.4em 0 0"><b>3.2 Constant definition</b></p>
+        <ul>
+            <li><code>const double BASE_FARE = 25.0, RATE_PER_KM = 12.0, WAIT_RATE = 2.0;</code></li>
+            <li><code>const double LONG_TRIP_KM = 20.0;</code></li>
+        </ul>
+        <p style="margin:.4em 0 0"><b>3.3 Reading input</b></p>
+        <ul>
+            <li><code>cin &gt;&gt; distance &gt;&gt; waitMinutes;</code></li>
+        </ul>
+        <p style="margin:.4em 0 0"><b>3.4 Perform the operations</b></p>
+        <ul>
+            <li><code>if (distance &gt; LONG_TRIP_KM) { ...read surchargeRate...; surcharge = (distance - LONG_TRIP_KM) * surchargeRate; }</code>
+            </li>
+            <li><code>fare = BASE_FARE + distance * RATE_PER_KM + waitMinutes * WAIT_RATE + surcharge;</code></li>
+        </ul>
+        <p style="margin:.4em 0 0"><b>3.5 Print the result</b></p>
+        <ul>
+            <li>Print the surcharge and the total fare with two decimals.</li>
+        </ul>
+        <h3>5. Write the code</h3>
+        <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    // Step 3.1 and 3.2: declaration, initialization and constants
+    const double BASE_FARE = 25.0, RATE_PER_KM = 12.0, WAIT_RATE = 2.0;
+    const double LONG_TRIP_KM = 20.0;
+    double distance, surchargeRate, surcharge = 0.0;
+    int waitMinutes;
+
+    // Step 3.3: read input
+    cout &lt;&lt; "Enter distance (km) and waiting time (minutes) separated by space: ";
+    cin &gt;&gt; distance &gt;&gt; waitMinutes;
+
+    // Step 3.4: calculate the fare
+    if (distance &gt; LONG_TRIP_KM) {
+        cout &lt;&lt; "Enter surcharge per extra km: ";
+        cin &gt;&gt; surchargeRate;
+        surcharge = (distance - LONG_TRIP_KM) * surchargeRate;
+    }
+    double fare = BASE_FARE + distance * RATE_PER_KM + waitMinutes * WAIT_RATE + surcharge;
+
+    // Step 3.5: print the result
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Surcharge: " &lt;&lt; surcharge &lt;&lt; endl;
+    cout &lt;&lt; "Total fare: " &lt;&lt; fare &lt;&lt; endl;
+    return 0;
+}</pre>
+        <p class="lab">Sample run (input in the first lines):</p>
+        <pre>25 10
+3
+Surcharge: 15.00
+Total fare: 360.00</pre>
+        <div class="tip"><b>Key ideas</b>
+            <ul>
+                <li>Named constants make the formula readable and easy to change.</li>
+                <li>Check by hand: 25 + 25 × 12 + 10 × 2 + (25 − 20) × 3 = 25 + 300 + 20 + 15 = 360.</li>
+            </ul>
+        </div>
+        <h2 id="quiz">Quiz practicals</h2>
+        <p>Do the analysis and the code yourself, <b>on paper or in your editor first</b>. Then type a short summary of
+            your analysis and your code below and submit. The full model solution appears only after you submit.</p>
+        <div class="exq">
+            <h3 style="margin-top:0">Quiz practical 1: Student result</h3>
+            <p>Write a program that reads a student’s marks in <b>five subjects</b> (each out of 100). Print the total,
+                the average and the word <b>Pass</b> if the average is 50 or more, otherwise <b>Fail</b>.</p>
+            <p class="lab">Test: 70 65 80 55 60 gives total 330.00, average 66.00, Pass.</p><span class="lab">Your
+                analysis (input, output, process):</span><textarea
+                placeholder="Input: ...&#10;Output: ...&#10;Process: ..."></textarea><span class="lab">Your
+                code:</span><textarea placeholder="#include &lt;iostream&gt;&#10;..."></textarea><button
+                class="btn">Submit and show the model solution</button><span class="msg"></span>
+            <div class="sol" hidden><b>Model solution</b>
+                <div class="grid">
+                    <div class="card">
+                        <h3>2.1 Input</h3>
+                        <ul>
+                            <li>five marks</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>2.2 Output</h3>
+                        <ul>
+                            <li>total</li>
+                            <li>average</li>
+                            <li>Pass or Fail</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>3. Process / operation</h3>
+                <ul>
+                    <li>Declare five variables for the marks (double, so decimals are allowed).</li>
+                    <li>Define the pass mark (50) as a constant.</li>
+                    <li>Read the five marks.</li>
+                    <li>total = sum of the marks; average = total / 5.</li>
+                    <li>Choose “Pass” or “Fail” by comparing the average with the pass mark. The conditional operator ?:
+                        does this in one expression.</li>
+                    <li>Print the three results.</li>
+                </ul>
+                <h3>4. Design the program</h3>
+                <p style="margin:.4em 0 0"><b>Declarations and constants</b></p>
+                <ul>
+                    <li><code>double m1, m2, m3, m4, m5;</code></li>
+                    <li><code>const double PASS_MARK = 50.0;</code></li>
+                </ul>
+                <p style="margin:.4em 0 0"><b>Operations</b></p>
+                <ul>
+                    <li><code>double total = m1 + m2 + m3 + m4 + m5;</code></li>
+                    <li><code>double average = total / 5;</code></li>
+                    <li><code>(average &gt;= PASS_MARK ? "Pass" : "Fail")</code></li>
+                </ul>
+                <h3>5. Write the code</h3>
+                <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    const double PASS_MARK = 50.0;
+    double m1, m2, m3, m4, m5;
+
+    cout &lt;&lt; "Enter five marks separated by space: ";
+    cin &gt;&gt; m1 &gt;&gt; m2 &gt;&gt; m3 &gt;&gt; m4 &gt;&gt; m5;
+
+    double total = m1 + m2 + m3 + m4 + m5;
+    double average = total / 5;
+
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Total: " &lt;&lt; total &lt;&lt; endl;
+    cout &lt;&lt; "Average: " &lt;&lt; average &lt;&lt; endl;
+    cout &lt;&lt; "Result: " &lt;&lt; (average &gt;= PASS_MARK ? "Pass" : "Fail") &lt;&lt; endl;
+    return 0;
+}</pre>
+                <p class="lab">Sample run (input in the first lines):</p>
+                <pre>70 65 80 55 60
+Total: 330.00
+Average: 66.00
+Result: Pass</pre>
+                <div class="tip"><b>Key ideas</b>
+                    <ul>
+                        <li>Because <code>total</code> is a <code>double</code>, <code>total / 5</code> keeps the
+                            decimals. With int marks you would write <code>total / 5.0</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="exq">
+            <h3 style="margin-top:0">Quiz practical 2: Painting a room</h3>
+            <p>A room has four walls to paint. Read the room’s <b>length, width and height</b> (metres) and the <b>paint
+                    cost per m²</b>. Doors and windows take up a fixed 5 m², which is not painted. One can of paint
+                covers 10 m². Print the wall area to paint, the paint cost, and the <b>number of cans</b> needed (a
+                part-used can still has to be bought).</p>
+            <p class="lab">Test: 5 4 3 10 gives area 49.00 m², cost 490.00 and 5 cans.</p><span class="lab">Your
+                analysis (input, output, process):</span><textarea
+                placeholder="Input: ...&#10;Output: ...&#10;Process: ..."></textarea><span class="lab">Your
+                code:</span><textarea placeholder="#include &lt;iostream&gt;&#10;..."></textarea><button
+                class="btn">Submit and show the model solution</button><span class="msg"></span>
+            <div class="sol" hidden><b>Model solution</b>
+                <div class="grid">
+                    <div class="card">
+                        <h3>2.1 Input</h3>
+                        <ul>
+                            <li>length</li>
+                            <li>width</li>
+                            <li>height</li>
+                            <li>paint cost per m²</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>2.2 Output</h3>
+                        <ul>
+                            <li>wall area to paint</li>
+                            <li>paint cost</li>
+                            <li>number of cans</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>3. Process / operation</h3>
+                <ul>
+                    <li>Declare variables for the inputs.</li>
+                    <li>Define the opening area (5) and can coverage (10) as constants.</li>
+                    <li>Read the input.</li>
+                    <li>wall area = 2 × (length + width) × height − openings.</li>
+                    <li>cost = wall area × cost per m².</li>
+                    <li>cans = wall area / 10, rounded <b>up</b> with <code>ceil()</code> from the math library.</li>
+                    <li>Print the results.</li>
+                </ul>
+                <h3>4. Design the program</h3>
+                <p style="margin:.4em 0 0"><b>Declarations and constants</b></p>
+                <ul>
+                    <li><code>double length, width, height, ratePerM2;</code></li>
+                    <li><code>const double OPENINGS = 5.0, CAN_COVERAGE = 10.0;</code></li>
+                    <li><code>#include &lt;cmath&gt;</code> for <code>ceil</code></li>
+                </ul>
+                <p style="margin:.4em 0 0"><b>Operations</b></p>
+                <ul>
+                    <li><code>double wallArea = 2 * (length + width) * height - OPENINGS;</code></li>
+                    <li><code>int cans = (int)ceil(wallArea / CAN_COVERAGE);</code></li>
+                </ul>
+                <h3>5. Write the code</h3>
+                <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+int main() {
+    const double OPENINGS = 5.0;      // doors and windows (m2)
+    const double CAN_COVERAGE = 10.0; // m2 covered by one can
+    double length, width, height, ratePerM2;
+
+    cout &lt;&lt; "Enter length, width, height (m) and paint cost per m2: ";
+    cin &gt;&gt; length &gt;&gt; width &gt;&gt; height &gt;&gt; ratePerM2;
+
+    double wallArea = 2 * (length + width) * height - OPENINGS;
+    double cost = wallArea * ratePerM2;
+    int cans = (int)ceil(wallArea / CAN_COVERAGE);
+
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Wall area to paint: " &lt;&lt; wallArea &lt;&lt; " m2" &lt;&lt; endl;
+    cout &lt;&lt; "Paint cost: " &lt;&lt; cost &lt;&lt; endl;
+    cout &lt;&lt; "Cans needed: " &lt;&lt; cans &lt;&lt; endl;
+    return 0;
+}</pre>
+                <p class="lab">Sample run (input in the first lines):</p>
+                <pre>5 4 3 10
+Wall area to paint: 49.00 m2
+Paint cost: 490.00
+Cans needed: 5</pre>
+                <div class="tip"><b>Key ideas</b>
+                    <ul>
+                        <li>49 / 10 = 4.9, and <code>ceil</code> rounds up to 5. Plain integer division would give 4,
+                            which is too few cans.</li>
+                        <li>The cast <code>(int)</code> converts the result of <code>ceil</code> (a double) into a whole
+                            number.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="exq">
+            <h3 style="margin-top:0">Quiz practical 3: Average speed</h3>
+            <p>A runner covers a distance in a given time. Read the <b>distance in km</b>, then the time as <b>hours,
+                    minutes and seconds</b>. Print the total time in seconds and the average speed in km/h.</p>
+            <p class="lab">Test: 12 km in 1 h 30 min 0 s gives 5400 seconds and 8.00 km/h.</p><span class="lab">Your
+                analysis (input, output, process):</span><textarea
+                placeholder="Input: ...&#10;Output: ...&#10;Process: ..."></textarea><span class="lab">Your
+                code:</span><textarea placeholder="#include &lt;iostream&gt;&#10;..."></textarea><button
+                class="btn">Submit and show the model solution</button><span class="msg"></span>
+            <div class="sol" hidden><b>Model solution</b>
+                <div class="grid">
+                    <div class="card">
+                        <h3>2.1 Input</h3>
+                        <ul>
+                            <li>distance (km)</li>
+                            <li>hours</li>
+                            <li>minutes</li>
+                            <li>seconds</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>2.2 Output</h3>
+                        <ul>
+                            <li>total time in seconds</li>
+                            <li>average speed in km/h</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>3. Process / operation</h3>
+                <ul>
+                    <li>Declare a double for the distance and ints for hours, minutes and seconds.</li>
+                    <li>Read the input.</li>
+                    <li>total seconds = hours × 3600 + minutes × 60 + seconds.</li>
+                    <li>time in hours = total seconds / 3600.0 (real division).</li>
+                    <li>speed = distance / time in hours.</li>
+                    <li>Print the results.</li>
+                </ul>
+                <h3>4. Design the program</h3>
+                <p style="margin:.4em 0 0"><b>Declarations</b></p>
+                <ul>
+                    <li><code>double distance;</code></li>
+                    <li><code>int hours, minutes, seconds;</code></li>
+                </ul>
+                <p style="margin:.4em 0 0"><b>Operations</b></p>
+                <ul>
+                    <li><code>int totalSeconds = hours * 3600 + minutes * 60 + seconds;</code></li>
+                    <li><code>double totalHours = totalSeconds / 3600.0;</code></li>
+                    <li><code>double speed = distance / totalHours;</code></li>
+                </ul>
+                <h3>5. Write the code</h3>
+                <pre>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    double distance;
+    int hours, minutes, seconds;
+
+    cout &lt;&lt; "Enter distance (km), then hours, minutes, seconds: ";
+    cin &gt;&gt; distance &gt;&gt; hours &gt;&gt; minutes &gt;&gt; seconds;
+
+    int totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    double totalHours = totalSeconds / 3600.0;
+    double speed = distance / totalHours;
+
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Total time: " &lt;&lt; totalSeconds &lt;&lt; " seconds" &lt;&lt; endl;
+    cout &lt;&lt; "Average speed: " &lt;&lt; speed &lt;&lt; " km/h" &lt;&lt; endl;
+    return 0;
+}</pre>
+                <p class="lab">Sample run (input in the first lines):</p>
+                <pre>12 1 30 0
+Total time: 5400 seconds
+Average speed: 8.00 km/h</pre>
+                <div class="tip"><b>Key ideas</b>
+                    <ul>
+                        <li>Writing <code>3600.0</code> forces real division. With <code>3600</code> the integer
+                            division would give 1 hour instead of 1.5.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 		</main>
 	</body>
 </html>

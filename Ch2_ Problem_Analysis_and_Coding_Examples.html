@@ -296,10 +296,10 @@
 	<body>
 		<nav>
 	        <b>Contents</b>
-	        <a href="#about">Problem Analysis Overview</a>
-	        <a href="#anatomy">Example 1: A shop bill with discount and VAT</a>
-	        <a href="#compile">Example 2: Change from a cashier</a>
-	        <a href="#pre">Example 3: Taxi fare</a>
+	        <a href="#method">Problem Analysis Overview</a>
+	        <a href="##ex1">Example 1: A shop bill with discount and VAT</a>
+	        <a href="##ex2">Example 2: Change from a cashier</a>
+	        <a href="##ex3">Example 3: Taxi fare</a>
         </nav>
 		<main>
 			<p style="text-align: center; font-size: x-large; font-weight: bolder;">Fundamentals of Programming I <br>
@@ -307,11 +307,13 @@
 			</p>
 			<h3>Problem Analysis and Coding Examples</h3>
 			<div class="card">
-				<b>Overview</b>
+				<h2 id="method">The Method</h2>
 				<p>
-					Writing code is the <i>last</i> step. When you analyze and design first, the code almost writes itself. Follow the
-					same five steps every time:
-				</p>
+					Analyse the problem <b>before</b> you type code. Writing code is the <i>last</i> step. 
+					When you analyze and design first, the code almost writes itself. In short, folowing these steps makes writing code quick, 
+					because every line of code is already planned. 
+				</p> 
+		        <p></p>
 				<div class="flow">
 					<span>1 Problem description</span><i>→</i><span>2 Analysis: input and output</span><i>→</i><span>3 Process</span
 					><i>→</i><span>4 Design</span><i>→</i><span>5 Write the code</span>
@@ -326,7 +328,7 @@
 					<li><b>Code:</b> type the design. Each design step becomes a block of code. Then test.</li>
 				</ul>
 			</div>
-			<h2>Example 1: A shop bill with discount and VAT</h2>
+			<h2 id="ex1">Example 1: A shop bill with discount and VAT</h2>
 			<h3>1. Problem description</h3>
 			<p>
 				Write a C++ program to calculate the amount a customer must pay in a shop. The program reads the unit price, the
@@ -510,7 +512,7 @@ Total due: 517.50</pre
 				</ul>
 			</div>
 
-			<h2>Example 2: Change from a cashier</h2>
+			<h2 id="ex2">Example 2: Change from a cashier</h2>
 			<h3>1. Problem description</h3>
 			<p>
 				A cashier gives change using the fewest notes and coins of <b>100, 50, 10, 5 and 1 birr</b>. Write a C++ program
@@ -658,7 +660,7 @@ Change: 537 birr
 				</ul>
 			</div>
 
-			        <h2 id="ex2">Example 3: Taxi fare</h2>
+			        <h2 id="ex3">Example 3: Taxi fare</h2>
         <h3>1. Problem description</h3>
         <p>Write a C++ program to calculate the <b>fare of a taxi trip</b>. The fare is a base fare plus a charge per
             kilometre plus a charge per minute of waiting. If the trip is longer than 20 km, the program asks for a

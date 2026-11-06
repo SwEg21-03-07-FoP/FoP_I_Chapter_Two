@@ -940,5 +940,14 @@ Average speed: 8.00 km/h</pre>
             </div>
         </div>
 		</main>
+   	 	<script>(function () {
+            Array.prototype.forEach.call(document.querySelectorAll('.exq'), function (c) {
+                var b = c.querySelector('button'), t = c.querySelectorAll('textarea'), m = c.querySelector('.msg'), s = c.querySelector('.sol');
+                b.onclick = function () {
+                    if (t[0].value.trim().length < 20 || t[1].value.trim().length < 30) { m.textContent = 'Write your analysis and some code first, then submit.'; return }
+                    m.textContent = ''; s.hidden = false; b.disabled = true; t[0].readOnly = true; t[1].readOnly = true
+                }
+            })
+        })();</script>
 	</body>
 </html>

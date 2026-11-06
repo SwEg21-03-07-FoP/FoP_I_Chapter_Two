@@ -444,10 +444,15 @@ vat       = taxable * VAT_RATE;
 total     = taxable + vat;</pre
 			>
 			<p><b>4.5 Printing the result</b></p>
+			<p>Print the Total due along with Discount and VAT.</p>
 			<pre>
 cout &lt;&lt; fixed &lt;&lt; setprecision(2);
-cout &lt;&lt; "Total due: " &lt;&lt; total &lt;&lt; endl;</pre
-			>
+cout &lt;&lt; "Subtotal : " &lt;&lt; subtotal &lt;&lt; endl;
+cout &lt;&lt; "Discount : " &lt;&lt; discount &lt;&lt; endl;
+cout &lt;&lt; "VAT (15%): " &lt;&lt; vat &lt;&lt; endl;
+cout &lt;&lt; "Total due: " &lt;&lt; total &lt;&lt; endl;
+			</pre>
+			
 			<h3>5. Write the code</h3>
 			<pre>
 #include &lt;iostream&gt;
@@ -607,6 +612,7 @@ coins1   = rest;</pre
 				</table>
 			</div>
 			<p><b>4.4 Printing the result</b></p>
+			<p>Print the <b>Change due</b> and the number of each notes used for change.</p>
 			<pre>
 cout &lt;&lt; "Change: " &lt;&lt; change &lt;&lt; " birr" &lt;&lt; endl;
 cout &lt;&lt; "100 birr notes: " &lt;&lt; notes100 &lt;&lt; endl;

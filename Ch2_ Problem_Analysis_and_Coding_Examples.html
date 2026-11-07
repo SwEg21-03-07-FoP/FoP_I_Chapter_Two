@@ -687,16 +687,28 @@ Change: 537 birr
             <div class="card">
                 <h3>2.1 Input</h3>
                 <ul>
-                    <li>distance (km)</li>
+                    <li>total distance (km)</li>
                     <li>waiting time (minutes)</li>
-                    <li>surcharge per extra km, only if distance &gt; 20</li>
+                </ul>
+                <p>Constants</p>
+                <ul>
+                    <li>Base fare </li>
+                    <li>rate per km</li>
+                    <li>waiting rate </li>
+                    <li>surcharge rate </li>
+                    <li>long-trip limit</li>
                 </ul>
             </div>
             <div class="card">
                 <h3>2.2 Output</h3>
                 <ul>
+                    <li>the total distance</li>
+                    <li>Waiting time</li>
+                    <li>Extra distance</li>
+                    <li>Base fare</li>
+                    <li>Basic fare</li>
+                    <li>Extra fare (extra distance & wiating time) </li>
                     <li>the total fare</li>
-                    <li>in addition: the surcharge</li>
                 </ul>
             </div>
         </div>
@@ -705,34 +717,34 @@ Change: 537 birr
             <li>Declare variables for the inputs and results.</li>
             <li>Define the base fare, rate per km, wait rate and long-trip limit as constants.</li>
             <li>Initialize the surcharge to zero.</li>
-            <li>Print prompts and read the input.</li>
-            <li>Check whether the distance exceeds 20 km. If so, read the surcharge rate and compute surcharge =
-                (distance − 20) × rate.</li>
-            <li>Calculate the fare.</li>
-            <li>Print the result.</li>
+            <li>Print prompts for user to input data </li>
+            <li>Read the input.</li>
+            <li>Check whether the distance exceeds 20 km.</li>
+            <li>Calculate the extra distance, Basic fare, Extra fare, Total Fare.</li>
+            <li>Print the result: total distance, waiting time, extra distance, Basic fare, Extra fare, Total Fare.</li>
         </ul>
         <h3>4. Design the program</h3>
-        <p style="margin:.4em 0 0"><b>3.1 Variable declaration and initialization</b></p>
+        <p style="margin:.4em 0 0"><b>4.1 Variable declaration and initialization</b></p>
         <ul>
-            <li><code>double distance, surchargeRate, surcharge = 0.0;</code></li>
+            <li><code>float distance, surchargeRate, surcharge = 0.0;</code></li>
             <li><code>int waitMinutes;</code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>3.2 Constant definition</b></p>
+        <p style="margin:.4em 0 0"><b>4.2 Constant definition</b></p>
         <ul>
             <li><code>const double BASE_FARE = 25.0, RATE_PER_KM = 12.0, WAIT_RATE = 2.0;</code></li>
             <li><code>const double LONG_TRIP_KM = 20.0;</code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>3.3 Reading input</b></p>
+        <p style="margin:.4em 0 0"><b>4.3 Reading input</b></p>
         <ul>
             <li><code>cin &gt;&gt; distance &gt;&gt; waitMinutes;</code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>3.4 Perform the operations</b></p>
+        <p style="margin:.4em 0 0"><b>4.4 Perform the operations</b></p>
         <ul>
             <li><code>if (distance &gt; LONG_TRIP_KM) { ...read surchargeRate...; surcharge = (distance - LONG_TRIP_KM) * surchargeRate; }</code>
             </li>
             <li><code>fare = BASE_FARE + distance * RATE_PER_KM + waitMinutes * WAIT_RATE + surcharge;</code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>3.5 Print the result</b></p>
+        <p style="margin:.4em 0 0"><b>4.5 Print the result</b></p>
         <p>Print the <i>surcharge</i> and the <i>total fare</i> with two decimals.</p>
 		<pre>
 cout &lt;&lt; fixed &lt;&lt; setprecision(2);

@@ -679,8 +679,8 @@ Change: 537 birr
 			        <h2 id="ex3">Example 3: Taxi fare</h2>
         <h3>1. Problem description</h3>
         <p>Write a C++ program to calculate the <b>fare of a taxi trip</b>. The fare is a base fare plus a charge per
-            kilometre plus a charge per minute of waiting. If the trip is longer than 20 km, the program asks for a
-            <b>surcharge per extra km</b> and adds it for each kilometre beyond
+            Kilometre plus a charge per minute of waiting. If the trip is longer than 20 km, the program asks for a
+            <b>surcharge per extra km</b> and adds it for each Kilometre beyond
             20.<br><code>fare = base fare + distance × rate per km + waiting minutes × wait rate + surcharge</code>
         </p>
         <div class="grid">
@@ -715,8 +715,7 @@ Change: 537 birr
         <h3>3. Process / operation</h3>
         <ul>
             <li>Declare variables for the inputs and results.</li>
-            <li>Define the base fare, rate per km, wait rate and long-trip limit as constants.</li>
-            <li>Initialize the surcharge to zero.</li>
+            <li>Define the base fare, rate per km, wait rate surcharge rate, and long-trip limit as constants.</li>
             <li>Print prompts for user to input data </li>
             <li>Read the input.</li>
             <li>Check whether the distance exceeds 20 km.</li>
@@ -724,69 +723,117 @@ Change: 537 birr
             <li>Print the result: total distance, waiting time, extra distance, Basic fare, Extra fare, Total Fare.</li>
         </ul>
         <h3>4. Design the program</h3>
-        <p style="margin:.4em 0 0"><b>4.1 Variable declaration and initialization</b></p>
+        <p style="margin:.4em 0 0">
+            <b>4.1 Variable declaration and initialization</b>
+        </p>
         <ul>
-            <li><code>float distance, surchargeRate, surcharge = 0.0;</code></li>
+            <li><code>float distance;</code></li>
             <li><code>int waitMinutes;</code></li>
+            <li><code>int total_distance;</code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>4.2 Constant definition</b></p>
+        <p style="margin:.4em 0 0">
+            <b>4.2 Constant definition</b>
+        </p>
         <ul>
-            <li><code>const double BASE_FARE = 25.0, RATE_PER_KM = 12.0, WAIT_RATE = 2.0;</code></li>
-            <li><code>const double LONG_TRIP_KM = 20.0;</code></li>
+            <li><code>const float BASE_FARE = 125.0, RATE_PER_KM = 15.0, WAIT_RATE = 20.0;</code></li>
+            <li><code>const float LONG_TRIP_KM = 20.0; SURCHARGE_RATE = 10.0</code></li>    
         </ul>
-        <p style="margin:.4em 0 0"><b>4.3 Reading input</b></p>
+        <p style="margin:.4em 0 0">
+            <b>4.3 Reading input</b>
+        </p>
         <ul>
-            <li><code>cin &gt;&gt; distance &gt;&gt; waitMinutes;</code></li>
+            <li><code> cout &lt;&lt; "Enter total distance (km): "; </code></li>
+            <li><code> cin  &gt;&gt; total_distance; </code></li>
+            <li><code> cout &lt;&lt; "Enter waiting time (minutes): "; </code></li>
+            <li><code> cin &lt;&lt; waitMinutes; </code></li>
         </ul>
-        <p style="margin:.4em 0 0"><b>4.4 Perform the operations</b></p>
+        <p style="margin:.4em 0 0">
+            <b>4.4 Perform the operations - calculate the total fare step by step</b>
+        </p>
         <ul>
-            <li><code>if (distance &gt; LONG_TRIP_KM) { ...read surchargeRate...; surcharge = (distance - LONG_TRIP_KM) * surchargeRate; }</code>
+            <li>Find the extraDistance of the trip: <br>
+                <code> float extraDistance = total_distance - LONG_TRIP_KM; </code>
             </li>
-            <li><code>fare = BASE_FARE + distance * RATE_PER_KM + waitMinutes * WAIT_RATE + surcharge;</code></li>
+            <li>Check if the distance exceed 20 km and calculate the surCharge: <br>
+                <code> surchargeFare = extraDistance > 0 ? extraDistance * SURCHARGE_RATE : 0.0;</code>
+            </li>
+            <li> Calculate the basicFare for the trip: <br>
+                <code>float basicFare = BASE_FARE + total_distance * RATE_PER_KM;</code>
+            </li>
+            <li> Calculate Fare for waiting times : <br>
+                <code>float waitingFare = waitMinutes * WAIT_RATE;</code>
+            </li>
+            <li> Calculate the totalFare of thr trip: <br>
+                <code>float totalFare = basicFare + surchargeFare + waitingFare;</code>
+            </li>
         </ul>
         <p style="margin:.4em 0 0"><b>4.5 Print the result</b></p>
-        <p>Print the <i>surcharge</i> and the <i>total fare</i> with two decimals.</p>
+        <p>Print the <i>total fare</i> with details. Use two decimals place.</p>
 		<pre>
-cout &lt;&lt; fixed &lt;&lt; setprecision(2);
-cout &lt;&lt; "Surcharge: " &lt;&lt; surcharge &lt;&lt; endl;
-cout &lt;&lt; "Total fare: " &lt;&lt; fare &lt;&lt; endl;	
+cout  &lt;&lt; "Your Trip Information and Fare Details: \n";
+cout  &lt;&lt; fixed  &lt;&lt; setprecision(2);
+cout  &lt;&lt; "Base Fare: "  &lt;&lt; BASE_FARE  &lt;&lt; endl;
+cout  &lt;&lt; "Total Distance: "  &lt;&lt; total_distance  &lt;&lt; endl;
+cout  &lt;&lt; "Extra Distance: "  &lt;&lt; extraDistance  &lt;&lt; endl;
+cout  &lt;&lt; "Waiting Time: "  &lt;&lt; waitMinutes  &lt;&lt; endl;
+cout  &lt;&lt; "Basic Trip Fare: "  &lt;&lt; basicFare  &lt;&lt; endl;
+cout  &lt;&lt; "Additional Fare (Extra Distance + Waiting Time): "  &lt;&lt; surchargeFare + waitingFare  &lt;&lt; endl;
+cout  &lt;&lt; "Total fare: "  &lt;&lt; totalFare  &lt;&lt; endl;
 		</pre>
 		
         <h3>5. Write the code</h3>
-        <pre>#include &lt;iostream&gt;
+        <pre>
+#include &lt;iostream&gt;
 #include &lt;iomanip&gt;
 using namespace std;
 
 int main() {
-    // Step 3.1 and 3.2: declaration, initialization and constants
-    const double BASE_FARE = 25.0, RATE_PER_KM = 12.0, WAIT_RATE = 2.0;
-    const double LONG_TRIP_KM = 20.0;
-    double distance, surchargeRate, surcharge = 0.0;
+    // Step 4.1 and 4.2: declaration, initialization and constants
+    const double BASE_FARE = 125.0, RATE_PER_KM = 15.0, WAIT_RATE = 20.0;
+    const double LONG_TRIP_KM = 20.0, SURCHARGE_RATE = 10.0;
+    double total_distance, surchargeFare = 0.0;
     int waitMinutes;
 
-    // Step 3.3: read input
-    cout &lt;&lt; "Enter distance (km) and waiting time (minutes) separated by space: ";
-    cin &gt;&gt; distance &gt;&gt; waitMinutes;
+    // Step 4.3: read input
+    cout &lt;&lt; "Enter total distance (km): ";
+    cin &gt;&gt; total_distance;
+    cout &lt;&lt; "Enter waiting time (minutes): ";
+    cin &gt;&gt; waitMinutes;
 
-    // Step 3.4: calculate the fare
-    if (distance &gt; LONG_TRIP_KM) {
-        cout &lt;&lt; "Enter surcharge per extra km: ";
-        cin &gt;&gt; surchargeRate;
-        surcharge = (distance - LONG_TRIP_KM) * surchargeRate;
-    }
-    double fare = BASE_FARE + distance * RATE_PER_KM + waitMinutes * WAIT_RATE + surcharge;
+    // Step 4.4: calculate the fare
+    float extraDistance = total_distance - LONG_TRIP_KM;
+    surchargeFare = extraDistance > 0 ? extraDistance * SURCHARGE_RATE : 0.0;
 
-    // Step 3.5: print the result
+    double basicFare = BASE_FARE + total_distance * RATE_PER_KM;
+    double waitingFare = waitMinutes * WAIT_RATE;
+    double totalFare = basicFare + surchargeFare + waitingFare;
+
+    // Step 4.5: print the result
+    cout &lt;&lt; "Your Trip Information and Fare Details: \n";
     cout &lt;&lt; fixed &lt;&lt; setprecision(2);
-    cout &lt;&lt; "Surcharge: " &lt;&lt; surcharge &lt;&lt; endl;
-    cout &lt;&lt; "Total fare: " &lt;&lt; fare &lt;&lt; endl;
+    cout &lt;&lt; "Base Fare: " &lt;&lt; BASE_FARE &lt;&lt; endl;
+    cout &lt;&lt; "Total Distance: " &lt;&lt; total_distance &lt;&lt; endl;
+    cout &lt;&lt; "Extra Distance: " &lt;&lt; extraDistance &lt;&lt; endl;
+    cout &lt;&lt; "Waiting Time: " &lt;&lt; waitMinutes &lt;&lt; endl;
+    cout &lt;&lt; "Basic Trip Fare: " &lt;&lt; basicFare &lt;&lt; endl;
+    cout &lt;&lt; "Additional Fare (Extra Distance + Waiting Time): " &lt;&lt; surchargeFare + waitingFare &lt;&lt; endl;
+    cout &lt;&lt; "Total fare: " &lt;&lt; totalFare &lt;&lt; endl;
     return 0;
+}
+
 }</pre>
         <p class="lab">Sample run (input in the first lines):</p>
-        <pre>25 10
-3
-Surcharge: 15.00
-Total fare: 360.00</pre>
+        <pre>Enter total distance (km): 35
+Enter waiting time (minutes): 10
+Your Trip Information and Fare Details:
+Base Fare: 125.00
+Total Distance: 35.00
+Extra Distance: 15.00
+Waiting Time: 10
+Basic Trip Fare: 650.00
+Additional Fare (Extra Distance + Waiting Time): 350.00
+Total fare: 1000.00
+</pre>
         <div class="tip"><b>Key ideas</b>
             <ul>
                 <li>Named constants make the formula readable and easy to change.</li>

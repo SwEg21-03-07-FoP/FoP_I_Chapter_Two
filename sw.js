@@ -4,10 +4,12 @@ const CACHE_NAME = 'course-workspace-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './Chapter_One_Lecture_Note.html',
-  './Flowchart_Practice_Exercises.html',
-  './Exercises_Solution.html',
-  './Revision_Quiz_MCQ.html'
+  './Chapter_Two_Lecture_Note.html'
+  './Ch2_Practice_Exercises.html'
+  './Ch2_Exercises_Solutions.html'
+  './Ch2_Revision_Quiz_MCQ.html'
+  './Ch2_ Problem_Analysis_and_Coding_Examples.html'
+  './Ch2_ Practical_Exercise1.html'
 ];
 
 // 1. Install: Download and cache all pages upfront
